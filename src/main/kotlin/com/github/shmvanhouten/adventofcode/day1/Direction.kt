@@ -2,11 +2,11 @@ package com.github.shmvanhouten.adventofcode.day1
 
 enum class Direction {
     NORTH,
+    EAST,
     SOUTH,
-    WEST,
-    EAST;
+    WEST;
 
-    fun turnRight(): Direction {
+    fun turnLeft(): Direction {
         return if(this == NORTH) {
             WEST
         }else {
@@ -14,8 +14,8 @@ enum class Direction {
         }
     }
 
-    fun turnLeft(): Direction {
-        return if(this == EAST) {
+    fun turnRight(): Direction {
+        return if(this == WEST) {
             NORTH
         }else {
             Direction.values()[this.ordinal + 1]
