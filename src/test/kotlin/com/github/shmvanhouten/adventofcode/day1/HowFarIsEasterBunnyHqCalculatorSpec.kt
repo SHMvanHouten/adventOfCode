@@ -10,9 +10,11 @@ import org.jetbrains.spek.api.dsl.it
 
 class HowFarIsEasterBunnyHqCalculatorSpec : Spek({
     describe("a calculator to calculate how far the EasterBunny's hq is") {
-        val calculator = HowFarIsEasterBunnyHqCalculator()
+
+
 
         given("We get the instructions: go 1 step to the right") {
+            val calculator = HowFarIsEasterBunnyHqCalculator()
             val distance: Int = calculator.calculateDistanceToHq("R1")
             it("should calculate a distance of 1") {
                 assertThat(distance, equalTo(1))
@@ -20,6 +22,7 @@ class HowFarIsEasterBunnyHqCalculatorSpec : Spek({
         }
 
         given("We get the instructions: go 2 steps to the right") {
+            val calculator = HowFarIsEasterBunnyHqCalculator()
             val distance: Int = calculator.calculateDistanceToHq("R2")
             it("should calculate a distance of 2") {
                 assertThat(distance, equalTo(2))
@@ -27,11 +30,29 @@ class HowFarIsEasterBunnyHqCalculatorSpec : Spek({
         }
 
         given("We get the instructions: go 1 step to the right, and another step to the right") {
+            val calculator = HowFarIsEasterBunnyHqCalculator()
             val distance: Int = calculator.calculateDistanceToHq("R1, R1")
             it("should calculate a distance of 2") {
                 assertThat(distance, equalTo(2))
             }
         }
+
+        given("We get the instructions: go 1 step to the right, and another step to the right") {
+            val calculator = HowFarIsEasterBunnyHqCalculator()
+            val distance: Int = calculator.calculateDistanceToHq("L2, L2")
+            it("should calculate a distance of 4") {
+                assertThat(distance, equalTo(4))
+            }
+        }
+
+        given("We get the instructions: go 1 step to the right, and another step to the right, and another") {
+            val calculator = HowFarIsEasterBunnyHqCalculator()
+            val distance: Int = calculator.calculateDistanceToHq("R1, R1, R1")
+            it("should calculate a distance of 1") {
+                assertThat(distance, equalTo(1))
+            }
+        }
+
     }
 
 })
