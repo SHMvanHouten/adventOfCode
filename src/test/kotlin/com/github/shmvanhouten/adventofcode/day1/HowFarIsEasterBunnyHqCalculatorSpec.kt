@@ -2,6 +2,7 @@ package com.github.shmvanhouten.adventofcode.day1
 
 import org.hamcrest.CoreMatchers.equalTo
 import org.hamcrest.MatcherAssert.assertThat
+import org.hamcrest.Matchers.`is`
 import org.jetbrains.spek.api.Spek
 import org.jetbrains.spek.api.dsl.describe
 import org.jetbrains.spek.api.dsl.given
@@ -69,14 +70,32 @@ class HowFarIsEasterBunnyHqCalculatorSpec : Spek({
             }
         }
 
-        given("We get the instructions from the actual challenge") {
+        given("We get the instructions from the actual challenge and we apply the new business logic") {
             val calculator = HowFarIsEasterBunnyHqCalculator()
             val distance: Int = calculator.calculateDistanceToHq("L5, R1, L5, L1, R5, R1, R1, L4, L1, L3, R2, R4, L4, L1, L1, R2, R4, R3, L1, R4, L4, L5, L4, R4, L5, R1, R5, L2, R1, R3, L2, L4, L4, R1, L192, R5, R1, R4, L5, L4, R5, L1, L1, R48, R5, R5, L2, R4, R4, R1, R3, L1, L4, L5, R1, L4, L2, L5, R5, L2, R74, R4, L1, R188, R5, L4, L2, R5, R2, L4, R4, R3, R3, R2, R1, L3, L2, L5, L5, L2, L1, R1, R5, R4, L3, R5, L1, L3, R4, L1, L3, L2, R1, R3, R2, R5, L3, L1, L1, R5, L4, L5, R5, R2, L5, R2, L1, L5, L3, L5, L5, L1, R1, L4, L3, L1, R2, R5, L1, L3, R4, R5, L4, L1, R5, L1, R5, R5, R5, R2, R1, R2, L5, L5, L5, R4, L5, L4, L4, R5, L2, R1, R5, L1, L5, R4, L3, R4, L2, R3, R3, R3, L2, L2, L2, L1, L4, R3, L4, L2, R2, R5, L1, R2")
-            it("should calculate a distance of 226") {
-                assertThat(distance, equalTo(226))
+            it("should calculate a distance of 79") {
+                assertThat(distance, equalTo(79))
             }
         }
 
+    }
+
+    describe("a calculator to calculate how far the EasterBunny's hq is, being the first point our path crosses"){
+        given("We get the instructions: R8, R4, R4, R8"){
+            val calculator = HowFarIsEasterBunnyHqCalculator()
+            val distance = calculator.calculateDistanceToHq("R8, R4, R4, R8")
+            it("should calculate a distance of 4"){
+                assertThat(distance, `is`(4))
+            }
+        }
+
+        given("We get the instructions from the actual challenge") {
+            val calculator = HowFarIsEasterBunnyHqCalculator()
+            val distance = calculator.calculateDistanceToHq("L3, R1, L4, L1, L2, R4, L3, L3, R2, R3, L5, R1, R3, L4, L1, L2, R2, R1, L4, L4, R2, L5, R3, R2, R1, L1, L2, R2, R2, L1, L1, R2, R1, L3, L5, R4, L3, R3, R3, L5, L190, L4, R4, R51, L4, R5, R5, R2, L1, L3, R1, R4, L3, R1, R3, L5, L4, R2, R5, R2, L1, L5, L1, L1, R78, L3, R2, L3, R5, L2, R2, R4, L1, L4, R1, R185, R3, L4, L1, L1, L3, R4, L4, L1, R5, L5, L1, R5, L1, R2, L5, L2, R4, R3, L2, R3, R1, L3, L5, L4, R3, L2, L4, L5, L4, R1, L1, R5, L2, R4, R2, R3, L1, L1, L4, L3, R4, L3, L5, R2, L5, L1, L1, R2, R3, L5, L3, L2, L1, L4, R4, R4, L2, R3, R1, L2, R1, L2, L2, R3, R3, L1, R4, L5, L3, R4, R4, R1, L2, L5, L3, R1, R4, L2, R5, R4, R2, L5, L3, R4, R1, L1, R5, L3, R1, R5, L2, R1, L5, L2, R2, L2, L3, R3, R3, R1")
+            it("should calculate a distance of 143") {
+                assertThat(distance, `is`(143))
+            }
+        }
     }
 
 })
