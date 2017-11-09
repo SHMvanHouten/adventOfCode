@@ -1,19 +1,19 @@
 package com.github.shmvanhouten.adventofcode.day2
 
 
-class BathroomCodeCalculator {
-    private val finger = Finger()
+class BathroomCodeCalculator (private val finger: Finger){
 
 
-    fun calculateCodeFromInstructions(instructions: List<String>): MutableList<Int> {
-    val listOfDigitsToPress = mutableListOf<Int>()
+
+    fun calculateCodeFromInstructions(instructions: List<String>): String {
+    val stringBuilder = StringBuilder()
         for (instructionStep in instructions) {
             for (instruction in instructionStep) {
                 followInstruction(instruction)
             }
-            listOfDigitsToPress.add(finger.location)
+            stringBuilder.append(finger.location)
         }
-        return listOfDigitsToPress
+        return stringBuilder.toString()
     }
 
     private fun followInstruction(instruction: Char) {
