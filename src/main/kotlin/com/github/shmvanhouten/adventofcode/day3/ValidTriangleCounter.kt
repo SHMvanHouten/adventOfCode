@@ -3,12 +3,14 @@ package com.github.shmvanhouten.adventofcode.day3
 class ValidTriangleCounter(private val validTriangleChecker: ValidTriangleChecker = ValidTriangleChecker()) {
 
     fun countValidTriangles(inputTrianglesString: String): Int {
-        val trianglesList = buildListOfTriangles(inputTrianglesString)
+
+        val trianglesList = formatInputStringToList(inputTrianglesString)
         return trianglesList.filter { validTriangleChecker.isTriangleValid(formatToTriangleWithDescendingValues(it)) }.size
     }
 
     fun countValidTrianglesFromVerticalInput(inputTrianglesString: String): Int {
-        val inputLines = buildListOfTriangles(inputTrianglesString)
+
+        val inputLines = formatInputStringToList(inputTrianglesString)
 
         var validTriangleCount = 0
 
@@ -16,20 +18,19 @@ class ValidTriangleCounter(private val validTriangleChecker: ValidTriangleChecke
 
         for (inputLine in inputLines) {
             inputLine.trimStart().split("  ").mapIndexed { index, side -> tempTriangles[index].add(side.toInt()) }
-            when (tempTriangles[2].size) {
-                3 -> {
-                    validTriangleCount += tempTriangles.filter { validTriangleChecker.isTriangleValid(it.sortedDescending()) }.size
-                    tempTriangles.map { it.clear() }
-                }
+
+            if (tempTriangles[2].size == 3) {
+                validTriangleCount += tempTriangles.filter { validTriangleChecker.isTriangleValid(it.sortedDescending()) }.size
+                tempTriangles.map { it.clear() }
             }
         }
         return validTriangleCount
     }
 
-    private fun buildListOfTriangles(triangles: String): List<String> {
-        return triangles.replace("    ", "  ").replace("   ", "  ")
-                .trimStart().split("\n")
-    }
+    private fun formatInputStringToList(triangles: String): List<String> =
+            triangles.replace("    ", "  ").replace("   ", "  ")
+                    .split("\n")
+
 
     private fun formatToTriangleWithDescendingValues(triangleString: String) =
             triangleString.trimStart().split("  ").map { it.toInt() }.sortedDescending()
