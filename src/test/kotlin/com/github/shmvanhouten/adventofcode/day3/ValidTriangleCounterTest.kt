@@ -28,21 +28,35 @@ class ValidTriangleCounterTest {
 
     @Test
     fun `it should solve the challenge input`() {
-        val challengeInputTriangles = """541  588  421
-827  272  126
+
+        val triangleCounter = ValidTriangleCounter()
+        assertThat(triangleCounter.countValidTriangles(challengeInputTriangles), `is`(993))
+    }
+
+    @Test
+    fun `it should solve the challenge input with the new rule, every vertical 3 values make up a triangle now`() {
+
+        val triangleCounter = ValidTriangleCounter()
+        assertThat(triangleCounter.countValidTrianglesFromVerticalInput(challengeInputTriangles), `is`(1849))
+    }
+
+
+
+private val challengeInputTriangles = """541  588  421
+827    272  126
 660  514  367
 39  703  839
 229  871  3
 237  956  841
-898  566  112
+898  566    112
 101  79  112
-813  541  146
+813   541  146
 603  135  565
 335  363  180
-382  493  669
+382  493   669
 545  81  843
 657  960  849
-823  909  9
+823   909  9
 370  194  908
 101  750  317
 295  671  968
@@ -1939,8 +1953,4 @@ class ValidTriangleCounterTest {
 466  88  293
 40  813  103
 436  766  254"""
-
-        val triangleCounter = ValidTriangleCounter()
-        assertThat(triangleCounter.countValidTriangles(challengeInputTriangles), `is`(993))
-    }
 }
