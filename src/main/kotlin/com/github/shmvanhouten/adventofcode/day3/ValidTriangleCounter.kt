@@ -1,50 +1,36 @@
 package com.github.shmvanhouten.adventofcode.day3
 
-class ValidTriangleCounter (private val validTriangleChecker: ValidTriangleChecker = ValidTriangleChecker()){
-    fun countValidTriangles(triangles: String): Int {
-        val trianglesReformatted = reformatTriangleSideString(triangles)
-        return trianglesReformatted.trimStart().split("\n").filter { validTriangleChecker.isTriangleValid(it.trimStart().split("  ").map{ it.toInt() }.sortedDescending()) }.size
+class ValidTriangleCounter(private val validTriangleChecker: ValidTriangleChecker = ValidTriangleChecker()) {
+
+    fun countValidTriangles(inputTrianglesString: String): Int {
+        val trianglesList = buildListOfTriangles(inputTrianglesString)
+        return trianglesList.filter { validTriangleChecker.isTriangleValid(formatToTriangleWithDescendingValues(it)) }.size
     }
 
-    fun countValidTrianglesFromVerticalInput(triangles: String): Int {
-        val trianglesReformatted = reformatTriangleSideString(triangles)
-        val completeSidesList = trianglesReformatted.trimStart().splitToSequence("    ","  ","  ", "\n")
-        var firstTempTriangle = mutableListOf<Int>()
-        var secondTempTriangle = mutableListOf<Int>()
-        var thirdTempTriangle = mutableListOf<Int>()
-        val finalTriangleList = mutableListOf<List<Int>>()
-        var counter = 0
-        for (side in completeSidesList) {
-            when(counter){
-                0,3,6 -> {
-                    firstTempTriangle.add(side.toInt())
-                    counter++
-                }
-                1,4,7 -> {
-                    secondTempTriangle.add(side.toInt())
-                    counter++
-                }
-                2,5 -> {
-                    thirdTempTriangle.add(side.toInt())
-                    counter++
-                }
-                8 -> {
-                    thirdTempTriangle.add(side.toInt())
-                    finalTriangleList.add(firstTempTriangle.sortedDescending())
-                    finalTriangleList.add(secondTempTriangle.sortedDescending())
-                    finalTriangleList.add(thirdTempTriangle.sortedDescending())
-                    firstTempTriangle.clear()
-                    secondTempTriangle.clear()
-                    thirdTempTriangle.clear()
-                    counter = 0
+    fun countValidTrianglesFromVerticalInput(inputTrianglesString: String): Int {
+        val inputLines = buildListOfTriangles(inputTrianglesString)
+
+        var validTriangleCount = 0
+
+        val tempTriangles = listOf<MutableList<Int>>(mutableListOf(), mutableListOf(), mutableListOf())
+
+        for (inputLine in inputLines) {
+            inputLine.trimStart().split("  ").mapIndexed { index, side -> tempTriangles[index].add(side.toInt()) }
+            when (tempTriangles[2].size) {
+                3 -> {
+                    validTriangleCount += tempTriangles.filter { validTriangleChecker.isTriangleValid(it.sortedDescending()) }.size
+                    tempTriangles.map { it.clear() }
                 }
             }
-            completeSidesList.drop(1)
         }
-        return finalTriangleList.filter { validTriangleChecker.isTriangleValid(it) }.size
+        return validTriangleCount
     }
 
-    private fun reformatTriangleSideString(triangles: String) = triangles.replace("    ", "  ").replace("   ", "  ")
+    private fun buildListOfTriangles(triangles: String): List<String> {
+        return triangles.replace("    ", "  ").replace("   ", "  ")
+                .trimStart().split("\n")
+    }
 
-
+    private fun formatToTriangleWithDescendingValues(triangleString: String) =
+            triangleString.trimStart().split("  ").map { it.toInt() }.sortedDescending()
 }
