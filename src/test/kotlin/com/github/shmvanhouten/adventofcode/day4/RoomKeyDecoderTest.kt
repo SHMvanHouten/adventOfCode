@@ -74,11 +74,11 @@ class RoomKeyDecoderTest {
     fun `it should sum up the ids of the real rooms for the challenge input`() {
 
         val keyDecoder = RoomKeyDecoder()
-
         assertThat(keyDecoder.checkIfRoomsAreReal(challengeInputKeys), `is`(361724))
     }
+}
 
-    private val challengeInputKeys = """aczupnetwp-mfyyj-opalcexpye-977[peyac]
+    val challengeInputKeys = """aczupnetwp-mfyyj-opalcexpye-977[peyac]
 qzchnzbshud-cxd-trdq-sdrshmf-105[jqexn]
 molgbzqfib-bdd-mrozexpfkd-289[bdfmo]
 enzcntvat-pnaql-qrfvta-351[antqv]
@@ -1052,5 +1052,3 @@ udglrdfwlyh-gbh-ghyhorsphqw-465[hgdlr]
 krxqjijamxdb-kdwwh-vjatncrwp-823[kvmoi]
 tpspahyf-nyhkl-kfl-aljouvsvnf-981[flahk]
 bxaxipgn-vgpst-qphzti-rdcipxcbtci-635[ipctx]"""
-
-}
