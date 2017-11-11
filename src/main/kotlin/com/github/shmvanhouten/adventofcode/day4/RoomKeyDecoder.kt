@@ -15,7 +15,6 @@ class RoomKeyDecoder {
         else 0
     }
 
-
     private fun retrieveRoomIdentifiersFromKey(key: String): Triple<String, Int, String> {
         val (name, sectorIdAndCheckSum) = key.split("-").partition { it[0].isLetter() }
         val sectorId = sectorIdAndCheckSum[0].substringBefore('[').toInt()
@@ -24,40 +23,24 @@ class RoomKeyDecoder {
     }
 
     private fun getFiveCharactersMostRepresentedInTheName(name: String): String {
-        val amountsOfCharactersInName = getMapOfAmountsOfCharactersInName(name)
+        val sortedCharacters = sortCharactersByQuantityAndAlphabet(name)
 
-        return sort5CharactersAppropriate(amountsOfCharactersInName)
+        val roomKey = StringBuilder()
+
+        sortedCharacters.mapIndexed { index, char -> if (index < 5) roomKey.append(char) }
+
+        return roomKey.toString()
     }
 
-    private fun getMapOfAmountsOfCharactersInName(name: String): MutableMap<Int, MutableList<Char>> {
-        val amountsOfCharactersInName = mutableMapOf<Int, MutableList<Char>>()
-
-        for (char in name) {
-            val amountOfThisCharInName = name.count { it == char }
-            if (!amountsOfCharactersInName.containsKey(amountOfThisCharInName)) {
-                amountsOfCharactersInName.put(amountOfThisCharInName, mutableListOf(char))
-            }
-            if (!amountsOfCharactersInName[amountOfThisCharInName]!!.contains(char)) {
-                amountsOfCharactersInName[amountOfThisCharInName]!!.add(char)
-            }
-        }
-        return amountsOfCharactersInName
+    private fun sortCharactersByQuantityAndAlphabet(name: String): MutableSet<Char> {
+        val characterToAmountMap = name.associateBy({ it }, { countHowManyCharactersAreInName(it, name) })
+        return characterToAmountMap.toSortedMap(compareByDescending<Char> { characterToAmountMap[it] }.thenBy { it }).keys
     }
 
-    private fun sort5CharactersAppropriate(amountsOfCharactersInName: MutableMap<Int, MutableList<Char>>): String {
-        val sortedBySizeMap = amountsOfCharactersInName.toSortedMap()
-        val fiveMostCommonCharactersBuilder = StringBuilder()
-
-        for (key in sortedBySizeMap.keys.reversed()) {
-            val listOfCharacters = sortedBySizeMap[key]!!
-            listOfCharacters.sort()
-            for (char in listOfCharacters) {
-                if (fiveMostCommonCharactersBuilder.length < 5) fiveMostCommonCharactersBuilder.append(char)
-                else return fiveMostCommonCharactersBuilder.toString()
-            }
-        }
-        return fiveMostCommonCharactersBuilder.toString()
+    private fun countHowManyCharactersAreInName(char: Char, name: String): Int {
+        return name.count { it == char }
     }
+
 }
 
 
