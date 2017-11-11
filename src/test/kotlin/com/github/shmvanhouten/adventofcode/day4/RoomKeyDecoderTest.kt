@@ -52,7 +52,7 @@ class RoomKeyDecoderTest {
     fun `it should assert jvuzbtly-nyhkl-yhiipa-zavyhnl-123(yhlai) is not a valid room key`() {
         val key = "jvuzbtly-nyhkl-yhiipa-zavyhnl-123[yhlai]"
         val keyDecoder = RoomKeyDecoder()
-        assertThat(keyDecoder.checkIfRoomIsReal(key), `is`(0))
+        assertThat(keyDecoder.checkIfRoomIsReal(key), `is`(123))
     }
 
     @Test
@@ -75,7 +75,7 @@ class RoomKeyDecoderTest {
 
         val keyDecoder = RoomKeyDecoder()
 
-        assertThat(keyDecoder.checkIfRoomsAreReal(challengeInputKeys), `is`(123 + 987 + 404))
+        assertThat(keyDecoder.checkIfRoomsAreReal(challengeInputKeys), `is`(361724))
     }
 
     private val challengeInputKeys = """aczupnetwp-mfyyj-opalcexpye-977[peyac]
