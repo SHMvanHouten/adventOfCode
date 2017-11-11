@@ -28,8 +28,7 @@ class ValidTriangleCounter(private val validTriangleChecker: ValidTriangleChecke
     }
 
     private fun formatInputStringToList(triangles: String): List<String> =
-            triangles.replace("    ", "  ").replace("   ", "  ")
-                    .split("\n")
+            triangles.replace("    ", "  ").replace("   ", "  ").split("\n")
 
 
     private fun formatToTriangleWithDescendingValues(triangleString: String) =
