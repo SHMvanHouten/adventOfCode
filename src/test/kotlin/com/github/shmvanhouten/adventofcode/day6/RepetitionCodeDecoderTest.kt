@@ -8,7 +8,7 @@ class RepetitionCodeDecoderTest {
 
     @Test
     fun `it Should find the most used characters in each column`() {
-        val repetitionCodeDecoder = RepetitionCodeDecoder()
+        val repetitionCodeDecoder = RepetitionCodeDecoderMostOccuringImpl()
         val repetitionCode = """eedadn
 drvtee
 eandsr
@@ -29,9 +29,37 @@ enarar"""
     }
 
     @Test
+    fun `it Should find the least used characters in each column`() {
+        val repetitionCodeDecoder = RepetitionCodeDecoderLeastOccuringImpl()
+        val repetitionCode = """eedadn
+drvtee
+eandsr
+raavrd
+atevrs
+tsrnev
+sdttsa
+rasrtv
+nssdts
+ntnada
+svetve
+tesnvt
+vntsnd
+vrdear
+dvrsen
+enarar"""
+        assertThat(repetitionCodeDecoder.decodeRepetitiveCode(repetitionCode), equalTo("advent"))
+    }
+
+    @Test
     fun `it Should find the most used characters in each column for the challenge input`() {
-        val repetitionCodeDecoder = RepetitionCodeDecoder()
+        val repetitionCodeDecoder = RepetitionCodeDecoderMostOccuringImpl()
         assertThat(repetitionCodeDecoder.decodeRepetitiveCode(challengeInput), equalTo("mlncjgdg"))
+    }
+
+    @Test
+    fun `it Should find the least used characters in each column for the challenge input`() {
+        val repetitionCodeDecoder = RepetitionCodeDecoderLeastOccuringImpl()
+        assertThat(repetitionCodeDecoder.decodeRepetitiveCode(challengeInput), equalTo("bipjaytb"))
     }
 
 

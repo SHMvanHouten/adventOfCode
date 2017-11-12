@@ -1,6 +1,6 @@
 package com.github.shmvanhouten.adventofcode.day6
 
-class RepetitionCodeDecoder {
+abstract class RepetitionCodeDecoder {
     fun decodeRepetitiveCode(repetitionCode: String): String {
         val repetitionCodeList = repetitionCode.split("\n")
         val columnRange = 0.until(repetitionCodeList[0].length)
@@ -24,16 +24,6 @@ class RepetitionCodeDecoder {
         return alphabet.associateByTo ( mutableMapOf, {it}, {0} )
     }
 
-    private fun buildMessageFromMostOccurringCharacterPerColumn(columnToCharacterOccurrence: MutableMap<Int, MutableMap<Char, Int>>): String {
-        val messageBuilder = StringBuilder()
-        columnToCharacterOccurrence.forEach {
-            messageBuilder.append(getMostCommonCharacter(it.value))
-        }
-        return messageBuilder.toString()
-    }
+    abstract fun buildMessageFromMostOccurringCharacterPerColumn(columnToCharacterOccurrence: MutableMap<Int, MutableMap<Char, Int>>): String
 
-    private fun getMostCommonCharacter(characterMap: MutableMap<Char, Int>): Char {
-        println(characterMap)
-        return characterMap.maxBy { it.value }!!.key
-    }
 }
