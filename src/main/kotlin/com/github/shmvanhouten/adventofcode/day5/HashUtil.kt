@@ -14,7 +14,7 @@ class HashUtil {
     fun get00000xHashMd5(input: String) = hashStringIfItStartsWith00000("MD5", input)
 
     private fun hashStringIfItStartsWith00000(type: String, input: String): Char? {
-        val HEX_CHARS = "0123456789ABCDEF"
+        val HEX_CHARS = "0123456789abcdef"
         val bytes = MessageDigest
                 .getInstance(type)
                 .digest(input.toByteArray())

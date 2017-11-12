@@ -26,4 +26,10 @@ class HashUtilTest {
         assertThat(hashUtil.get00000xHashMd5("abc5017308"), equalTo('8'))
     }
 
+    @Test
+    fun `for the input abc5278568 it should give an f`() {
+        val hashUtil = HashUtil()
+        assertThat(hashUtil.get00000xHashMd5("abc5278568"), equalTo('f'))
+    }
+
 }
