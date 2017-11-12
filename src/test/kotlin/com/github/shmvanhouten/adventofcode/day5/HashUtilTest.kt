@@ -9,13 +9,13 @@ class HashUtilTest {
     @Test
     fun `for the input abc3231929 it should give a 1`() {
         val hashUtil = HashUtil()
-        assertThat(hashUtil.get00000xHashMd5("abc3231929"), equalTo('1'))
+        assertThat(hashUtil.hashStringIfItStartsWith00000("abc3231929"), equalTo('1'))
     }
 
     @Test
     fun `for the input abc3231928 it should not return a value`() {
         val hashUtil = HashUtil()
-        val isCharNull = hashUtil.get00000xHashMd5("abc3231928") == null
+        val isCharNull = hashUtil.hashStringIfItStartsWith00000("abc3231928") == null
         assertThat(isCharNull, equalTo(true))
     }
 
@@ -23,13 +23,13 @@ class HashUtilTest {
     @Test
     fun `for the input abc5017308 it should give an 8`() {
         val hashUtil = HashUtil()
-        assertThat(hashUtil.get00000xHashMd5("abc5017308"), equalTo('8'))
+        assertThat(hashUtil.hashStringIfItStartsWith00000("abc5017308"), equalTo('8'))
     }
 
     @Test
     fun `for the input abc5278568 it should give an f`() {
         val hashUtil = HashUtil()
-        assertThat(hashUtil.get00000xHashMd5("abc5278568"), equalTo('f'))
+        assertThat(hashUtil.hashStringIfItStartsWith00000("abc5278568"), equalTo('f'))
     }
 
 }

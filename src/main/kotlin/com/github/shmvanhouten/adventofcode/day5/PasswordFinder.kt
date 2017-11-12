@@ -3,15 +3,15 @@ package com.github.shmvanhouten.adventofcode.day5
 class PasswordFinder(val hashUtil: HashUtil = HashUtil()) {
 
     fun calculatePasswordForFirstDoor(doorId: String): String {
-        val zeroToMax = 0..Int.MAX_VALUE
         val passwordBuilder = StringBuilder()
 
-        for (index in zeroToMax) {
-            val sixthHexaDecimal = hashUtil.get00000xHashMd5(doorId + index)
+        var index = 0
+        while (passwordBuilder.length < 8) {
+            val sixthHexaDecimal = hashUtil.hashStringIfItStartsWith00000(doorId + index)
             if (sixthHexaDecimal != null) {
                 passwordBuilder.append(sixthHexaDecimal)
-                if (passwordBuilder.length >= 8) break
             }
+            index++
         }
 
         return passwordBuilder.toString()
@@ -20,13 +20,13 @@ class PasswordFinder(val hashUtil: HashUtil = HashUtil()) {
     fun calculatePasswordForSecondDoor(doorId: String): String {
         val password = mutableMapOf<Char, Char>()
 
-        var i = 0
+        var index = 0
         while (password.size < 8) {
-            val sixthAndSeventhHexaDecimal = hashUtil.get00000xHashMd5Wherexis1to7incl(doorId + i)
+            val sixthAndSeventhHexaDecimal = hashUtil.hashStringIfItStartsWith00000xWherexIs1to7inc(doorId + index)
             if(sixthAndSeventhHexaDecimal != null && !password.containsKey(sixthAndSeventhHexaDecimal.first)){
                 password.put(sixthAndSeventhHexaDecimal.first, sixthAndSeventhHexaDecimal.second)
             }
-            i++
+            index++
         }
 
         return password.toSortedMap().values.joinToString("")

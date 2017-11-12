@@ -2,7 +2,6 @@ package com.github.shmvanhouten.adventofcode.day5
 
 import com.natpryce.hamkrest.assertion.assertThat
 import com.natpryce.hamkrest.equalTo
-import org.junit.Ignore
 import org.junit.Test
 
 class PasswordFinderTest {
@@ -41,7 +40,7 @@ class PasswordFinderTest {
     @Test
     fun `it should solve the input for the challenge, roomId ugkcyxxp second door`() {
         val passwordFinder = PasswordFinder()
-        val expectedPassword = "d4cd2ee1"
+        val expectedPassword = "f2c730e5"
         val retrievedPassword = passwordFinder.calculatePasswordForSecondDoor("ugkcyxxp")
 
         assertThat(retrievedPassword, equalTo(expectedPassword))
