@@ -15,7 +15,7 @@ abstract class RepetitionCodeDecoder {
             }
         }
 
-        return buildMessageFromMostOccurringCharacterPerColumn(columnToCharacterOccurrence)
+        return buildMessageAccordingToOccurrenceOfCharacterPerColumn(columnToCharacterOccurrence)
     }
 
     private fun createCharList(): MutableMap<Char, Int> {
@@ -24,6 +24,6 @@ abstract class RepetitionCodeDecoder {
         return alphabet.associateByTo ( mutableMapOf, {it}, {0} )
     }
 
-    abstract fun buildMessageFromMostOccurringCharacterPerColumn(columnToCharacterOccurrence: MutableMap<Int, MutableMap<Char, Int>>): String
+    abstract fun buildMessageAccordingToOccurrenceOfCharacterPerColumn(columnToCharacterOccurrence: Map<Int, MutableMap<Char, Int>>): String
 
 }
