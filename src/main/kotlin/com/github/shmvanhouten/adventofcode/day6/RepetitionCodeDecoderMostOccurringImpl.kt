@@ -1,7 +1,7 @@
 package com.github.shmvanhouten.adventofcode.day6
 
 class RepetitionCodeDecoderMostOccurringImpl : RepetitionCodeDecoder() {
-    override fun buildMessageAccordingToOccurrenceOfCharacterPerColumn(columnToCharacterOccurrence: Map<Int, MutableMap<Char, Int>>): String {
+    override fun buildMessageAccordingToOccurrenceOfCharacterPerColumn(columnToCharacterOccurrence: Map<Int, List<CharacterOccurrence>>): String {
         val messageBuilder = StringBuilder()
         columnToCharacterOccurrence.forEach {
             messageBuilder.append(getMostCommonCharacter(it.value))
@@ -10,7 +10,7 @@ class RepetitionCodeDecoderMostOccurringImpl : RepetitionCodeDecoder() {
     }
 
 
-    private fun getMostCommonCharacter(characterMap: Map<Char, Int>): Char? {
-        return characterMap.maxBy { it.value }?.key
+    private fun getMostCommonCharacter(characterMap: List<CharacterOccurrence>): Char? {
+        return characterMap.maxBy { it.occurrence }?.char
     }
 }

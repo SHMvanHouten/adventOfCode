@@ -2,28 +2,29 @@ package com.github.shmvanhouten.adventofcode.day6
 
 abstract class RepetitionCodeDecoder {
     fun decodeRepetitiveCode(repetitionCode: String): String {
-        val repetitionCodeList = repetitionCode.split("\n")
-        val columnRange = 0.until(repetitionCodeList[0].length)
 
-        val columnToCharacterOccurrence = mutableMapOf<Int, MutableMap<Char, Int>>()
-        columnRange.associateByTo (columnToCharacterOccurrence, { it }, { createCharList() })
+        val repetitionCodeList = repetitionCode.split("\n")
+        val columnToCharacterOccurrence = buildColumnToCharOccurrenceMap(repetitionCodeList)
 
         repetitionCodeList.forEach {
-            it.forEachIndexed {
-                index, char -> val characterMap = columnToCharacterOccurrence[index]
-                characterMap?.put(char, characterMap[char]!! + 1)
+            it.forEachIndexed { index, char -> columnToCharacterOccurrence[index]?.find { it.char == char }?.addOne()
             }
         }
 
         return buildMessageAccordingToOccurrenceOfCharacterPerColumn(columnToCharacterOccurrence)
     }
 
-    private fun createCharList(): MutableMap<Char, Int> {
-        val alphabet = 'a'..'z'
-        val mutableMapOf = mutableMapOf<Char, Int>()
-        return alphabet.associateByTo ( mutableMapOf, {it}, {0} )
+    private fun buildColumnToCharOccurrenceMap(repetitionCodeList: List<String>): Map<Int, List<CharacterOccurrence>> {
+
+        val columnRange = 0.until(repetitionCodeList[0].length)
+        return columnRange.associateBy({ it }, { createCharOccurrenceList() })
     }
 
-    abstract fun buildMessageAccordingToOccurrenceOfCharacterPerColumn(columnToCharacterOccurrence: Map<Int, MutableMap<Char, Int>>): String
+    private fun createCharOccurrenceList(): List<CharacterOccurrence> {
+        val alphabet = 'a'..'z'
+        return alphabet.map { CharacterOccurrence(it) }
+    }
+
+    abstract fun buildMessageAccordingToOccurrenceOfCharacterPerColumn(columnToCharacterOccurrence: Map<Int, List<CharacterOccurrence>>): String
 
 }
