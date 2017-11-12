@@ -14,7 +14,7 @@ class RoomFinderTest {
     }
 
     @Test
-    fun `it Should find the sector id for the room north pole objects`() {
+    fun `it Should find the sector id for the room northpole object storage`() {
         val roomFinder = RoomFinder()
         assertThat(roomFinder.findRoomWithName("northpole object storage", challengeInputKeys), `is`(482))
     }

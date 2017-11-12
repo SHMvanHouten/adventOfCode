@@ -40,7 +40,7 @@ class RoomKeyDecoder {
 
         val roomKey = StringBuilder()
 
-        sortedCharacters.mapIndexed { index, char -> if (index < 5) roomKey.append(char) }
+        run breaker@{sortedCharacters.forEachIndexed { index, char -> roomKey.append(char); if (index == 4) return@breaker}}
 
         return roomKey.toString()
     }
