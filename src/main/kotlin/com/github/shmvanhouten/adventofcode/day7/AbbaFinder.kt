@@ -6,9 +6,9 @@ class AbbaFinder {
     }
 
     private fun doesItOccurMoreThanOnce(inputString: String, char: Char): Boolean {
-        return if(inputString.count{ it == char } > 1){
-            val split = inputString.split(char)
-            split.filterIndexed { index, string -> (index > 0 || index < split.size - 1) && string.length == 2 && string[0] == string[1]}.isNotEmpty()
-        }else false
+        val split = inputString.split(char)
+        val startAndEndRemoved = split.filterIndexed { index, _ -> (index > 0 && index < split.size - 1) }
+        return startAndEndRemoved.any { it.length == 2 && it[0] == it[1] && it[0] != char }
     }
 }
+

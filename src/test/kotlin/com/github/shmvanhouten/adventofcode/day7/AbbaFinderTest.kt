@@ -30,4 +30,16 @@ class AbbaFinderTest {
         assertThat(abbaFinder.doesStringContainAbba("asdffsfaabbasfw"), equalTo(true))
     }
 
+    @Test
+    fun `it should not find an abba inside the string "aaaa"`() {
+        val abbaFinder = AbbaFinder()
+        assertThat(abbaFinder.doesStringContainAbba("aaaa"), equalTo(false))
+    }
+
+    @Test
+    fun `it should not find an abba inside the string "zztuumdsokfgtof"`() {
+        val abbaFinder = AbbaFinder()
+        assertThat(abbaFinder.doesStringContainAbba("zztuumdsokfgtof"), equalTo(false))
+    }
+
 }
