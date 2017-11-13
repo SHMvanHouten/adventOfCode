@@ -7,22 +7,22 @@ import org.junit.Test
 class AbaFinderTest {
 
     @Test
-    fun `it should find an abba inside the string "aba"`() {
+    fun `it should find a bab from the string "aba"`() {
         val abaFinder = AbaFinder()
-        val allAbasFromString = abaFinder.getAllAbasFromString("aba")
-        assertThat(allAbasFromString[0], equalTo("aba"))
+        val allAbasFromString = abaFinder.getAllPotentialBabsFromSequence("aba")
+        assertThat(allAbasFromString[0], equalTo("bab"))
     }
 
     @Test
     fun `it should find no abba inside the string "aaa"`() {
         val abaFinder = AbaFinder()
-        assertThat(abaFinder.getAllAbasFromString("aaa").isEmpty(), equalTo(true))
+        assertThat(abaFinder.getAllPotentialBabsFromSequence("aaa").isEmpty(), equalTo(true))
     }
 
     @Test
     fun `it should find no abba inside the string "aab"`() {
         val abaFinder = AbaFinder()
-        assertThat(abaFinder.getAllAbasFromString("aab").isEmpty(), equalTo(true))
+        assertThat(abaFinder.getAllPotentialBabsFromSequence("aab").isEmpty(), equalTo(true))
     }
 
 

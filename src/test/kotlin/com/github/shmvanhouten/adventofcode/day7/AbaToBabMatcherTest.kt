@@ -10,8 +10,8 @@ class AbaToBabMatcherTest {
     fun `it should find a match in bab for aba`() {
         val abaToBabMatcher = AbaToBabMatcher()
         val hypernetSequence = "bab"
-        val abaList = listOf<String>("aba")
-        assertThat(abaToBabMatcher.findBabMatchesInSequenceForAbas(hypernetSequence, abaList), equalTo(true))
+        val babList = listOf<String>("bab")
+        assertThat(abaToBabMatcher.findBabMatchesInSequence(hypernetSequence, babList), equalTo(true))
     }
 
     @Test
@@ -19,7 +19,7 @@ class AbaToBabMatcherTest {
         val abaToBabMatcher = AbaToBabMatcher()
         val hypernetSequence = "aab"
         val abaList = listOf<String>("aba")
-        assertThat(abaToBabMatcher.findBabMatchesInSequenceForAbas(hypernetSequence, abaList), equalTo(false))
+        assertThat(abaToBabMatcher.findBabMatchesInSequence(hypernetSequence, abaList), equalTo(false))
     }
 
 }

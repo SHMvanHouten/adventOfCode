@@ -41,16 +41,16 @@ aaaa[qwer]tyui
 ioxxoj[asdfgh]zxcvbn
 ioxxoj[asdfgh]zxcvbn
 ioxxoj[asdfgh]zxcvbn"""
-        assertThat(checker.countIpsthatSupportTLS(ips), equalTo(5))
+        assertThat(checker.countIpsThatSupportTLS(ips), equalTo(5))
     }
 
     @Test
     fun `it should find the amount of valid ips in the challenge input`() {
         val checker = TLSSupportCheckerForIp()
-        val count1 = checker.countIpsthatSupportTLS(challengeInput)
-        val count2 = checker.countIpsthatSupportTLS(challengeInputPart2)
-        val count3 = checker.countIpsthatSupportTLS(challengeInputPart3)
-        val count4 = checker.countIpsthatSupportTLS(challengeInputPart4)
+        val count1 = checker.countIpsThatSupportTLS(challengeInput)
+        val count2 = checker.countIpsThatSupportTLS(challengeInputPart2)
+        val count3 = checker.countIpsThatSupportTLS(challengeInputPart3)
+        val count4 = checker.countIpsThatSupportTLS(challengeInputPart4)
         val actualAmountOfTrue = count1 + count2 +count3 + count4
 
         assertThat(actualAmountOfTrue, equalTo(110))

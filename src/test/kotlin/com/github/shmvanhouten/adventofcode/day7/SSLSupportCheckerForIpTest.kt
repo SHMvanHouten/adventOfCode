@@ -29,10 +29,10 @@ class SSLSupportCheckerForIpTest{
 
     @Test
     fun `It should test the amount of ssl supported ips in the challenge input`() {
-        val count1 = sslSupportChecker.countIpsthatSupportSSL(challengeInput)
-        val count2 = sslSupportChecker.countIpsthatSupportSSL(challengeInputPart2)
-        val count3 = sslSupportChecker.countIpsthatSupportSSL(challengeInputPart3)
-        val count4 = sslSupportChecker.countIpsthatSupportSSL(challengeInputPart4)
+        val count1 = sslSupportChecker.countIpsThatSupportSSL(challengeInput)
+        val count2 = sslSupportChecker.countIpsThatSupportSSL(challengeInputPart2)
+        val count3 = sslSupportChecker.countIpsThatSupportSSL(challengeInputPart3)
+        val count4 = sslSupportChecker.countIpsThatSupportSSL(challengeInputPart4)
         val actualAmountOfTrue = count1 + count2 +count3 + count4
 
         assertThat(actualAmountOfTrue, equalTo(242))
