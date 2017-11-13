@@ -13,13 +13,13 @@ class AbbaFinderTest {
     }
 
     @Test
-    fun `it should find an abba inside the string "abca"`() {
+    fun `it should not find an abba inside the string "abca"`() {
         val abbaFinder = AbbaFinder()
         assertThat(abbaFinder.doesStringContainAbba("abca"), equalTo(false))
     }
 
     @Test
-    fun `it should find an abba inside the string "cdsawerdsf"`() {
+    fun `it should not find an abba inside the string "cdsawerdsf"`() {
         val abbaFinder = AbbaFinder()
         assertThat(abbaFinder.doesStringContainAbba("cdsawerdsf"), equalTo(false))
     }

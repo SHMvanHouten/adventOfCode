@@ -8,11 +8,11 @@ class TLSSupportCheckerForIp(private val abbaFinder: AbbaFinder = AbbaFinder()) 
 
     fun doesIpSupportTLS(ip: String): Boolean {
         val ipParts = ip.split('[', ']')
-        val normalSequences = ipParts.filterIndexed { index, _ -> index % 2 == 0 }
+        val supernetSequences = ipParts.filterIndexed { index, _ -> index % 2 == 0 }
         val hypernetSequences = ipParts.filterIndexed { index, _ -> index % 2 == 1 }
 
         return (!hypernetSequences.any { abbaFinder.doesStringContainAbba(it) }
-                && normalSequences.any { abbaFinder.doesStringContainAbba(it) })
+                && supernetSequences.any { abbaFinder.doesStringContainAbba(it) })
     }
 }
 

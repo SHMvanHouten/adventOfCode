@@ -6,11 +6,11 @@ import org.junit.Test
 
 class AbaFinderTest {
 
-
     @Test
     fun `it should find an abba inside the string "aba"`() {
         val abaFinder = AbaFinder()
-        assertThat(abaFinder.getAllAbasFromString("aba")[0], equalTo("aba"))
+        val allAbasFromString = abaFinder.getAllAbasFromString("aba")
+        assertThat(allAbasFromString[0], equalTo("aba"))
     }
 
     @Test

@@ -6,9 +6,8 @@ class AbbaFinder {
     }
 
     private fun isCharPartOfAnAbba(inputString: String, char: Char): Boolean {
-        val split = inputString.split(char)
-        val startAndEndRemoved = split.filterIndexed { index, _ -> (index > 0 && index < split.size - 1) }
-        return startAndEndRemoved.any { it.length == 2 && it[0] == it[1] && it[0] != char }
+        val splitInputString = inputString.split(char)
+        return splitInputString.filterIndexed { index, _ -> (index > 0 && index < splitInputString.size - 1) }.any { it.length == 2 && it[0] == it[1] && it[0] != char }
     }
 }
 

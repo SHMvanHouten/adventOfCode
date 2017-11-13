@@ -57,7 +57,7 @@ ioxxoj[asdfgh]zxcvbn"""
     }
 }
 
-private val challengeInput = """rhamaeovmbheijj[hkwbkqzlcscwjkyjulk]ajsxfuemamuqcjccbc
+val challengeInput = """rhamaeovmbheijj[hkwbkqzlcscwjkyjulk]ajsxfuemamuqcjccbc
 gdlrknrmexvaypu[crqappbbcaplkkzb]vhvkjyadjsryysvj[nbvypeadikilcwg]jwxlimrgakadpxu[dgoanojvdvwfabtt]yqsalmulblolkgsheo
 dqpthtgufgzjojuvzvm[eejdhpcqyiydwod]iingwezvcbtowwzc[uzlxaqenhgsebqskn]wcucfmnlarrvdceuxqc[dkwcsxeitcobaylhbvc]klxammurpqgmpsxsr
 gmmfbtpprishiujnpdi[wedykxqyntvrkfdzom]uidgvubnregvorgnhm
@@ -453,7 +453,7 @@ rubuyuyswgsvuryuhg[bggufeqnvnmcltkxdn]pdixuunidafnnzmvy[qmewpxbpqxfakkpjq]khvqsl
 wavmxyhhhthnxbqeu[zbvfbagorkymbgt]cxdkxjdiwemkbqcfs
 qcynqcmhyzosgclnlj[dkwoyvtlgqwferyplhs]ixqnfkjsytvyhwk[mskihexwsrthrwoxlkq]ybcepjxrwbfpwbrj[jtikhwoljzhnhxtd]bmbaqxydzmnsbbui
 tikuebtrsggwohnoc[gmsyovowwveyivxom]loedcvovnwjlxrin"""
-private val challengeInputPart2 = """fkabwdkuftcibicsnpy[chlyzxtachvkcehii]efjkasydyavlmogrn[ljdwiemzattmpezhrk]hfvbegnrtuvvxrfpmu[iobgqgzwgicgdljml]sxehdovgegoxgfuoz
+val challengeInputPart2 = """fkabwdkuftcibicsnpy[chlyzxtachvkcehii]efjkasydyavlmogrn[ljdwiemzattmpezhrk]hfvbegnrtuvvxrfpmu[iobgqgzwgicgdljml]sxehdovgegoxgfuoz
 jpxfbgmxcedzrhcw[awblqyolqotobty]zghskkdwhirzeabi[bpfnymgupwpyvtqno]rzxgvoakkarqzckqlm
 tpriezzqcwdapzmqi[uhbvdbykbjjugwx]updunlgopgmpuxhz[ppvimkoubpzdrdpnqs]nznhmtrcebortfmub
 yvhtcgpickhpkugv[peidlppzxitabkhqxqk]tewdgsemxtpdzlbp[cqlkzgucaeogcphup]sowzdzofzfxmuqm
@@ -1036,7 +1036,7 @@ jpntpuayoxlduqww[ezrqmpfomsfilulevvy]cjrjefmcnbswkrn
 mjfyrlfzelvjonnn[ulcbojuiaahlopwk]idenqpkorklddbnaz
 bhgshnxhcgbestmfnxv[mvebmbvioqohanjpog]mntsrtzfzurcnqxpk[bdcahsyheihtumq]eickztygasboinu
 zlplqtceqgefnke[gmqhyjmtykiyxnz]ipfqojghtbsioksptem""""
-private val challengeInputPart3 = """lbbcqgzfdgerelg[wwfafbqlxcfomqyu]watztxtiqwqrgqzjxan[gxntmrjphcqsuvbygab]wirbojjuorwzwudlblj
+val challengeInputPart3 = """lbbcqgzfdgerelg[wwfafbqlxcfomqyu]watztxtiqwqrgqzjxan[gxntmrjphcqsuvbygab]wirbojjuorwzwudlblj
 gjlljqgroftymgt[qbgnlxbwcxykipz]iihojyaziefwjyy[jnsmszgytndqggahn]qzgxgpudmhmyktg
 mzujymrvymlfuefmc[lowenpwwbljiuaex]zdoohchvifnhbln[kmmdgmmzpajpbpses]begvpvufpiiknphagyl[sblceylkgsmpmkkptpj]igmhiscbofjridkibs
 evlnogsloknvghdj[yxdrizzmnnpledj]mdphafqgsjokxfxv[jbjwluoucouakaef]iddlilvtxhmmzvhecf
@@ -1396,7 +1396,7 @@ qdnwpyegdrbmfqo[mpyvghubxywxodn]pdkygcgvqbigkxjln
 tbmxtcbosbngtpijv[efwxjziaiumatly]uvivkwastbzmmtunox[kyffxqqzpvpafqlf]cchjkiksobzfspeij
 orlelitjeeleenqlp[aymprhcrqopmcqpzyu]bxrezgoauocsjkhvzme
 cxdedomcafoqgxw[fdhzlcuebxoykssqp]thbzytmnhjdmlcpwtrx"""
-private val challengeInputPart4 = """cumdrbdcvlcivlruu[sokvdlqnoepnxojo]iaeigxckpehotfixc[nqoqbomvzvvitunbfn]kdufmsqqqzebnrueau[pltgnudqherpyedgrp]mkglrgvgbxbggzmmqcu
+val challengeInputPart4 = """cumdrbdcvlcivlruu[sokvdlqnoepnxojo]iaeigxckpehotfixc[nqoqbomvzvvitunbfn]kdufmsqqqzebnrueau[pltgnudqherpyedgrp]mkglrgvgbxbggzmmqcu
 nsikjklxfeoitvqob[vmbxlzqgdqmynzp]bplnmqtnnhvpvff[nmlhjuneukjvjkjgzj]xmbqpenxqpfxvhbwb
 zlddovbifjiezsqz[crhesriswhownhf]clabhuqqnketuyv[vhtixbfjfdhmial]achmqaiunmuesmkkdkc
 gmsuhcgelhdspxj[sybzfmauqlgkjogzrb]mgzajsyejptvpsusds[covquenstvxpnnlbc]tadiwlnreyzgxcsgmbn[nfcpdnvcjuyldtoh]pqfmdmbmcnkdisfmys
