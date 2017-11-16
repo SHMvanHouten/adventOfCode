@@ -40,7 +40,7 @@ class DecompressorV2Test {
     @Test
     fun `it should decompress the first part of the challenge input`() {
         val decompressor = DecompressorV2()
-        println(decompressor.getSizeOfDecompressedString(day9ChallengeSmallerPart))
+        assertThat(decompressor.getSizeOfDecompressedString(day9ChallengeSmallerPart), equalTo(167916441))
     }
 
     @Test
