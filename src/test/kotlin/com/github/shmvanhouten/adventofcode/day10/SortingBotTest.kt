@@ -7,10 +7,21 @@ import org.junit.Test
 
 class SortingBotTest {
 
+    val instructionCentral = InstructionCentral()
+
     @Test
     fun `it should give the instruction back '3 to bot3 and 5 to bot7'`() {
-        val bot = SortingBot(Instruction(Destination(BOT, 3), Destination(BOT, 7)))
+        val bot = SortingBot(Instruction(Destination(BOT, 3), Destination(BOT, 7)), instructionCentral,1)
         bot.takeChip(5)
-        assertThat(bot.takeChip(3)?.second, equalTo(Task(Destination(BOT, 7), 5)))
+        bot.takeChip(3)
+        assertThat(bot.pickupLog?.highChip, equalTo(5))
+    }
+
+    @Test
+    fun `it should take the chip but not do it's task yet`() {
+        val bot = SortingBot(Instruction(Destination(BOT, 3), Destination(BOT, 7)), instructionCentral,1)
+        val takeChip = bot.takeChip(5)
+        val isNull = bot.pickupLog == null
+        assertThat(isNull, equalTo(true))
     }
 }

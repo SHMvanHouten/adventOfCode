@@ -1,22 +1,29 @@
 package com.github.shmvanhouten.adventofcode.day10
 
-class SortingBot(private val instruction: Instruction) {
+class SortingBot(private val instruction: Instruction, val instructionCentral: InstructionCentral, val botNumber: Int): Receiver {
 
     private var firstChip: Int = -1
+    var pickupLog: PickupLog? = null
 
-    fun takeChip(value: Int): Pair<Task, Task>?{
-        return if (firstChip == -1) {
+    override fun takeChip(value: Int){
+        if (firstChip == -1) {
             firstChip = value
-            null
         }
         else performTask(value, firstChip)
     }
 
-    private fun performTask(secondChip: Int, firstChip: Int): Pair<Task, Task> {
+    private fun performTask(secondChip: Int, firstChip: Int) {
         val sortedChips = sortChips(firstChip, secondChip)
-        return Pair(Task(instruction.lowChipDestination, sortedChips.first),
-                Task(instruction.highChipDestination, sortedChips.second))
+
+        val lowChipDestination: Receiver = instructionCentral.retrieveReceiver(instruction.lowChipDestination)
+        lowChipDestination.takeChip(sortedChips.first)
+
+        val highChipDestination: Receiver = instructionCentral.retrieveReceiver(instruction.highChipDestination)
+        highChipDestination.takeChip(sortedChips.second)
+
+        pickupLog = PickupLog(botNumber, sortedChips.first, sortedChips.second)
     }
+
 
     private fun sortChips(firstChip: Int, secondChip: Int): Pair<Int, Int> {
         return if(firstChip > secondChip) Pair(secondChip, firstChip)
