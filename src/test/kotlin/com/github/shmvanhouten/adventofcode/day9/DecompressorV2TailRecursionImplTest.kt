@@ -33,6 +33,6 @@ class DecompressorV2TailRecursionImplTest {
     @Test
     fun `it should decompress the challenge input`() {
         val decompressor = DecompressorV2TailRecursionImpl()
-        assertThat(decompressor.getDecompressionSize(day9ChallengeInput), equalTo(107035L))
+        assertThat(decompressor.getDecompressionSize(day9ChallengeInput), equalTo(11451628995L))
     }
 }
