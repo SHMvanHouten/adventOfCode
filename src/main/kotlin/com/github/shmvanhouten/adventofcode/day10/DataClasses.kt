@@ -4,7 +4,7 @@ import com.github.shmvanhouten.adventofcode.day10.DestinationType.BOT
 
 data class Instruction(val lowChipDestination: Destination, val highChipDestination: Destination)
 
-data class Task(val destination: Destination, val chip: Int)
+data class PickupOrder(val destination: Destination, val chip: Int)
 
 data class Destination(val destinationType: DestinationType, val number: Int)
 

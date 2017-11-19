@@ -1,6 +1,6 @@
 package com.github.shmvanhouten.adventofcode.day10
 
-class SortingBot(private val instruction: Instruction, val instructionCentral: InstructionCentral, val botNumber: Int): Receiver {
+class SortingBot(private val instruction: Instruction, private val botDispatch: BotDispatch, val botNumber: Int): Receiver {
 
     private var firstChip: Int = -1
     var pickupLog: PickupLog? = null
@@ -13,15 +13,13 @@ class SortingBot(private val instruction: Instruction, val instructionCentral: I
     }
 
     private fun performTask(secondChip: Int, firstChip: Int) {
-        val sortedChips = sortChips(firstChip, secondChip)
+        val (lowChip, highChip) = sortChips(firstChip, secondChip)
 
-        val lowChipDestination: Receiver = instructionCentral.retrieveReceiver(instruction.lowChipDestination)
-        lowChipDestination.takeChip(sortedChips.first)
+        botDispatch.retrieveReceiver(instruction.lowChipDestination)?.takeChip(lowChip)
 
-        val highChipDestination: Receiver = instructionCentral.retrieveReceiver(instruction.highChipDestination)
-        highChipDestination.takeChip(sortedChips.second)
+        botDispatch.retrieveReceiver(instruction.highChipDestination)?.takeChip(highChip)
 
-        pickupLog = PickupLog(botNumber, sortedChips.first, sortedChips.second)
+        pickupLog = PickupLog(botNumber, lowChip, highChip)
     }
 
 
