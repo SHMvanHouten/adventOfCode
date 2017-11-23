@@ -85,7 +85,13 @@ inc a""")
     @Test
     fun `it should run the challenge input`() {
         val runner = AssemBunnyCodeRunner()
-        assertThat(runner.runInput(challengeInput), equalTo(BunnyState()))
+        assertThat(runner.runInput(challengeInput), equalTo(BunnyState(a = 318083, b = 196418)))
+    }
+
+    @Test
+    fun `it should run the challenge input with a different initial state c = 1`() {
+        val runner = AssemBunnyCodeRunner()
+        assertThat(runner.runInput(challengeInput, BunnyState(c = 1)), equalTo(BunnyState(a = 9227737, b = 5702887)))
     }
 }
 val challengeInput = """cpy 1 a

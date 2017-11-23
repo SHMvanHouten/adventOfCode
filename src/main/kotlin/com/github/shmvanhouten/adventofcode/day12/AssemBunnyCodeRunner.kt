@@ -7,9 +7,9 @@ import com.github.shmvanhouten.adventofcode.day12.Register.C
 import com.github.shmvanhouten.adventofcode.day12.Register.D
 
 class AssemBunnyCodeRunner {
-    fun runInput(input: String): BunnyState {
+    fun runInput(input: String, initialState: BunnyState = BunnyState()): BunnyState {
         val instructions = input.split("\n").map { it.split(' ') }
-        var state = BunnyState()
+        var state = initialState
 
         var index = 0
         while (index < instructions.size){
