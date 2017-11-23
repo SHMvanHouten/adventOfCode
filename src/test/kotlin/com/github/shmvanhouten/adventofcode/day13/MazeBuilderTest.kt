@@ -9,9 +9,8 @@ class MazeBuilderTest{
     fun `it should create a maze`() {
         val mazeBuilder = MazeBuilder()
         val maze = mazeBuilder.build(1352)
-        for (line in maze) {
-            val lineToChar = line.map { if(it == 0) '#' else '.' }
-            println(lineToChar.joinToString(""))
-        }
+        maze
+                .map { line -> line.map { if(it == 0) '#' else '.' } }
+                .forEach { println(it.joinToString("")) }
     }
 }
