@@ -35,4 +35,28 @@ class AssemBunnyCodeRunnerTest {
     }
 
 
+@Test
+    fun `it should store a value of 3 to register a and 5 to the register c`() {
+        val runner = AssemBunnyCodeRunner()
+        val state = runner.runInput("""cpy 5 c
+cpy 3 a""")
+        assertThat(state, equalTo(BunnyState(a = 3, c = 5)))
+    }
+
+    @Test
+    fun `it should increase the value of a by 1 to 42`() {
+        val runner = AssemBunnyCodeRunner()
+        val state = runner.runInput("""cpy 41 a
+inc a""")
+        assertThat(state, equalTo(BunnyState(a = 42)))
+    }
+
+    @Test
+    fun `it should decrease the value of a by 1 to 40`() {
+        val runner = AssemBunnyCodeRunner()
+        val state = runner.runInput("""cpy 41 a
+dec a""")
+        assertThat(state, equalTo(BunnyState(a = 40)))
+    }
+
 }
