@@ -8,41 +8,43 @@ class PathFinder {
         return pathsToVisitedNodes.find { it.coordinate == targetCoordinate }?.shortestPath?.size?: -1
     }
 
-    private fun getPathsToVisitedNodes(maze: List<List<Int>>): MutableList<Node> {
+    private fun getPathsToVisitedNodes(maze: List<List<Int>>): Set<Node> {
         var unvisitedNodes = setOf<Node>()
-        val visitedNodes = mutableListOf<Node>()
+        var visitedNodes = setOf<Node>()
 
-        val source = Node(SOURCE_COORDINATE, adjacentNodes = getAdjacentNodes(SOURCE_COORDINATE, maze))
-        unvisitedNodes = unvisitedNodes.add(source)
+        val sourceNode = Node(SOURCE_COORDINATE, adjacentNodes = findAdjacentNodes(SOURCE_COORDINATE, maze))
+        unvisitedNodes += sourceNode
 
         while (unvisitedNodes.isNotEmpty()) {
             val currentNode = getLowestDistanceNode(unvisitedNodes)
-            currentNode.adjacentNodes = getAdjacentNodes(currentNode.coordinate, maze)
-            unvisitedNodes = unvisitedNodes.remove(currentNode)
+            currentNode.adjacentNodes = findAdjacentNodes(currentNode.coordinate, maze)
+
+            unvisitedNodes -= currentNode
             for (adjacentNode in currentNode.adjacentNodes) {
                 val possibleVisitedNode: Node? = visitedNodes.find { it.coordinate == adjacentNode.coordinate }
-                val adjacentNodeWithPath = addPathToNode(currentNode, adjacentNode)
+                val adjacentNodeWithPath = calculatePathToNode(currentNode, adjacentNode)
 
                 if (possibleVisitedNode != null) {
-                    // if the path in the visited node is longer than the path in the adjacentNode remove it and add adjacentNode to unvisitedNotes to be evaluated
+
                     if (possibleVisitedNode.shortestPath.size > adjacentNodeWithPath.shortestPath.size) {
-                        visitedNodes.remove(possibleVisitedNode)
-                        unvisitedNodes = unvisitedNodes.add(adjacentNodeWithPath)
+                        visitedNodes -= possibleVisitedNode
+                        unvisitedNodes += adjacentNodeWithPath
                     } else {
-                        unvisitedNodes = unvisitedNodes.remove(adjacentNode)
+                        unvisitedNodes -= adjacentNode
                     }
+
                 } else {
-                    unvisitedNodes = unvisitedNodes.add(adjacentNodeWithPath)
+                    unvisitedNodes += adjacentNodeWithPath
                 }
             }
-            visitedNodes.add(currentNode)
+            visitedNodes += currentNode
         }
 
 
         return visitedNodes
     }
 
-    private fun addPathToNode(previousNode: Node, nodeToGivePathTo: Node): Node {
+    private fun calculatePathToNode(previousNode: Node, nodeToGivePathTo: Node): Node {
         val currentPath = previousNode.shortestPath.toMutableList()
         currentPath.add(nodeToGivePathTo)
         return Node(nodeToGivePathTo.coordinate, currentPath)
@@ -62,7 +64,7 @@ private fun <Node> Set<Node>.add(nodeToAdd: Node): Set<Node> {
     return mutableVersionOfSet.toSet()
 }
 
-private fun getAdjacentNodes(originCoordinate: Coordinate, maze: List<List<Int>>): List<Node> {
+private fun findAdjacentNodes(originCoordinate: Coordinate, maze: List<List<Int>>): List<Node> {
     val possibleAdjacent = listOf<Coordinate>(
             Coordinate(originCoordinate.x - 1, originCoordinate.y),
             Coordinate(originCoordinate.x + 1, originCoordinate.y),

@@ -33,7 +33,16 @@ class PathFinderTest{
         val mazeBuilder = MazeBuilder()
         val maze = mazeBuilder.build(1352)
 
-        assertThat(pathFinder.findQuickestPathLength(maze, Coordinate(31,39)), equalTo(30))
+        assertThat(pathFinder.findQuickestPathLength(maze, Coordinate(31,39)), equalTo(90))
+    }
+
+    @Test
+    fun `it should find all the points in the maze that take 50 or less steps to reach`() {
+        val pathFinder = PathFinder()
+        val mazeBuilder = MazeBuilder()
+        val maze = mazeBuilder.build(1352)
+
+//        assertThat()
     }
 
     private fun drawMaze(maze: List<List<Int>>) {
