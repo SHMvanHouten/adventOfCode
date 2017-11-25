@@ -12,6 +12,7 @@ class PathFinderTest{
         val maze = listOf(listOf(1,1,0),
                           listOf(0,1,0),
                           listOf(0,1,1))
+        drawMaze(maze)
         assertThat(pathFinder.findQuickestPathLength(maze, Coordinate(2,2)), equalTo(2))
     }
 
@@ -23,7 +24,16 @@ class PathFinderTest{
                           listOf(0,0,1,0),
                           listOf(0,1,1,0))
         drawMaze(maze)
-        assertThat(pathFinder.findQuickestPathLength(maze, Coordinate(2,3)), equalTo(4))
+        assertThat(pathFinder.findQuickestPathLength(maze, Coordinate(1,3)), equalTo(4))
+    }
+
+    @Test
+    fun `it should find the shortest path to 31,39 for the challenge maze`() {
+        val pathFinder = PathFinder()
+        val mazeBuilder = MazeBuilder()
+        val maze = mazeBuilder.build(1352)
+
+        assertThat(pathFinder.findQuickestPathLength(maze, Coordinate(31,39)), equalTo(30))
     }
 
     private fun drawMaze(maze: List<List<Int>>) {

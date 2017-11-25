@@ -5,10 +5,10 @@ class MazeBuilder {
     fun build(inputNumber: Int): List<List<Int>> {
         val range = 0..50
         val coordinates = mutableListOf<MutableList<Int>>()
-        for (x in range) {
+        for (y in range) {
             coordinates.add(mutableListOf())
-            for (y in range) {
-                coordinates[x].add(isCoordinateOpenSpaceOrWall(x, y, inputNumber).toInt())
+            for (x in range) {
+                coordinates[y].add(isCoordinateOpenSpaceOrWall(x, y, inputNumber).toInt())
             }
         }
         return coordinates
