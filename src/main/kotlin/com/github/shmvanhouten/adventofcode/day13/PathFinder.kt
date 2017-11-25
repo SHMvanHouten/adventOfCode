@@ -2,13 +2,8 @@ package com.github.shmvanhouten.adventofcode.day13
 
 class PathFinder {
     private val SOURCE_COORDINATE = Coordinate(1, 1)
-    fun findQuickestPathLength(maze: List<List<Int>>, targetCoordinate: Coordinate): Int {
 
-        val pathsToVisitedNodes = getPathsToVisitedNodes(maze)
-        return pathsToVisitedNodes.find { it.coordinate == targetCoordinate }?.shortestPath?.size?: -1
-    }
-
-    private fun getPathsToVisitedNodes(maze: List<List<Int>>): Set<Node> {
+    fun getPathsToVisitedNodes(maze: List<List<Int>>): Set<Node> {
         var unvisitedNodes = setOf<Node>()
         var visitedNodes = setOf<Node>()
 
@@ -29,15 +24,21 @@ class PathFinder {
                     if (possibleVisitedNode.shortestPath.size > adjacentNodeWithPath.shortestPath.size) {
                         visitedNodes -= possibleVisitedNode
                         unvisitedNodes += adjacentNodeWithPath
-                    } else {
-                        unvisitedNodes -= adjacentNode
                     }
 
                 } else {
                     unvisitedNodes += adjacentNodeWithPath
                 }
             }
-            visitedNodes += currentNode
+            val possibleVisitedNode: Node? = visitedNodes.find { it.coordinate == currentNode.coordinate }
+            if (possibleVisitedNode != null) {
+                if (possibleVisitedNode.shortestPath.size > currentNode.shortestPath.size){
+                    visitedNodes -= possibleVisitedNode
+                    visitedNodes += currentNode
+                }
+            } else {
+                visitedNodes += currentNode
+            }
         }
 
 
@@ -50,41 +51,28 @@ class PathFinder {
         return Node(nodeToGivePathTo.coordinate, currentPath)
     }
 
-}
-
-private fun <Node> Set<Node>.remove(nodeToRemove: Node): Set<Node> {
-    val mutableVersionOfSet = this.toMutableSet()
-    mutableVersionOfSet.remove(nodeToRemove)
-    return mutableVersionOfSet.toSet()
-}
-
-private fun <Node> Set<Node>.add(nodeToAdd: Node): Set<Node> {
-    val mutableVersionOfSet = this.toMutableSet()
-    mutableVersionOfSet.add(nodeToAdd)
-    return mutableVersionOfSet.toSet()
-}
-
-private fun findAdjacentNodes(originCoordinate: Coordinate, maze: List<List<Int>>): List<Node> {
-    val possibleAdjacent = listOf<Coordinate>(
-            Coordinate(originCoordinate.x - 1, originCoordinate.y),
-            Coordinate(originCoordinate.x + 1, originCoordinate.y),
-            Coordinate(originCoordinate.x, originCoordinate.y - 1),
-            Coordinate(originCoordinate.x, originCoordinate.y + 1))
-    return possibleAdjacent
-            .filter {
-                !isItWall(maze, it)
-            }
-            .map { Node(it) }
-}
-
-private fun isItWall(maze: List<List<Int>>, it: Coordinate): Boolean {
-    return try {
-        maze[it.y][it.x] == 0
-    } catch (e: IndexOutOfBoundsException) {
-        true
+    private fun findAdjacentNodes(originCoordinate: Coordinate, maze: List<List<Int>>): List<Node> {
+        val possibleAdjacent = listOf(
+                Coordinate(originCoordinate.x - 1, originCoordinate.y),
+                Coordinate(originCoordinate.x + 1, originCoordinate.y),
+                Coordinate(originCoordinate.x, originCoordinate.y - 1),
+                Coordinate(originCoordinate.x, originCoordinate.y + 1))
+        return possibleAdjacent
+                .filter {
+                    !isItAWall(maze, it)
+                }
+                .map { Node(it) }
     }
+
+    private fun isItAWall(maze: List<List<Int>>, it: Coordinate): Boolean {
+        return try {
+            maze[it.y][it.x] == 0
+        } catch (e: IndexOutOfBoundsException) {
+            true
+        }
+    }
+
+    private fun getLowestDistanceNode(unvisitedNodes: Set<Node>): Node =
+            unvisitedNodes.minBy { it.shortestPath.size } ?: unvisitedNodes.first()
+
 }
-
-private fun getLowestDistanceNode(unvisitedNodes: Set<Node>): Node =
-        unvisitedNodes.minBy { it.shortestPath.size } ?: unvisitedNodes.first()
-
