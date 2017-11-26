@@ -1,61 +1,65 @@
 package com.github.shmvanhouten.adventofcode.day13
 
-import com.github.shmvanhouten.adventofcode.day13.MazeComponent.*
-
 class PathFinder {
     private val SOURCE_COORDINATE = Coordinate(1, 1)
 
     fun getPathsToVisitedNodes(maze: Maze): Set<Node> {
-        var unvisitedNodes = setOf<Node>()
-        var visitedNodes = setOf<Node>()
 
-        val sourceNode = Node(SOURCE_COORDINATE, adjacentNodes = findAdjacentNodes(SOURCE_COORDINATE, maze))
-        unvisitedNodes += sourceNode
+        var visitedNodes = setOf<Node>()
+        var unvisitedNodes = setOf(Node(SOURCE_COORDINATE))
 
         while (unvisitedNodes.isNotEmpty()) {
             val currentNode = getLowestDistanceNode(unvisitedNodes)
-            currentNode.adjacentNodes = findAdjacentNodes(currentNode.coordinate, maze)
-
             unvisitedNodes -= currentNode
-            for (adjacentNode in currentNode.adjacentNodes) {
-                val possibleVisitedNode: Node? = visitedNodes.find { it.coordinate == adjacentNode.coordinate }
-                val adjacentNodeWithPath = calculatePathToNode(currentNode, adjacentNode)
 
+            buildAdjacentNodes(currentNode, maze)
+                    .forEach { adjacentNode ->
+                        
+                val possibleVisitedNode: Node? = visitedNodes.find { it == adjacentNode }
                 if (possibleVisitedNode != null) {
 
-                    if (possibleVisitedNode.shortestPath.size > adjacentNodeWithPath.shortestPath.size) {
+                    if (possibleVisitedNode.shortestPath.size > adjacentNode.shortestPath.size) {
                         visitedNodes -= possibleVisitedNode
-                        unvisitedNodes += adjacentNodeWithPath
+                        unvisitedNodes += adjacentNode
                     }
 
                 } else {
-                    unvisitedNodes += adjacentNodeWithPath
+                    unvisitedNodes += adjacentNode
                 }
             }
-            val possibleVisitedNode: Node? = visitedNodes.find { it.coordinate == currentNode.coordinate }
-            if (possibleVisitedNode != null) {
-                if (possibleVisitedNode.shortestPath.size > currentNode.shortestPath.size) {
-                    visitedNodes -= possibleVisitedNode
-                    visitedNodes += currentNode
-                }
-            } else {
-                visitedNodes += currentNode
-            }
+
+            visitedNodes = addCurrentNodeToVisitedNodeIfItHasTheShortestPath(visitedNodes, currentNode)
         }
 
 
         return visitedNodes
     }
 
+    private fun addCurrentNodeToVisitedNodeIfItHasTheShortestPath(originalVisitedNodes: Set<Node>, currentNode: Node): Set<Node> {
+        var newVisitedNodes = originalVisitedNodes
+        val possibleVisitedNode: Node? = newVisitedNodes.find { it == currentNode }
+        if (possibleVisitedNode != null) {
+            if (possibleVisitedNode.shortestPath.size > currentNode.shortestPath.size) {
+                newVisitedNodes -= possibleVisitedNode
+                newVisitedNodes += currentNode
+            } else {
+                //keep the original visited node with the shorter path
+            }
+        } else {
+            newVisitedNodes += currentNode
+        }
+        return newVisitedNodes
+    }
+
     private fun calculatePathToNode(previousNode: Node, nodeToGivePathTo: Node): Node {
-        val currentPath = previousNode.shortestPath.toMutableList()
-        currentPath.add(nodeToGivePathTo)
+        val currentPath = previousNode.shortestPath.plus(nodeToGivePathTo)
         return Node(nodeToGivePathTo.coordinate, currentPath)
     }
 
-    private fun findAdjacentNodes(originCoordinate: Coordinate, maze: Maze): List<Node> =
-        maze.getAdjacentCorridors(originCoordinate)
-                .map { Node(it) }
+    private fun buildAdjacentNodes(originNode: Node, maze: Maze): List<Node> =
+            maze.getAdjacentCorridors(originNode.coordinate)
+                    .map { Node(it) }
+                    .map { calculatePathToNode(originNode, it) }
 
 
     private fun getLowestDistanceNode(unvisitedNodes: Set<Node>): Node =
