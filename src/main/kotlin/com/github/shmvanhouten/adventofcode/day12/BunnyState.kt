@@ -1,103 +1,46 @@
 package com.github.shmvanhouten.adventofcode.day12
 
+import com.github.shmvanhouten.adventofcode.day12.Register.*
+
 data class BunnyState(val a: Int = 0, val b: Int = 0, val c: Int = 0, val d: Int = 0){
-    fun setA(aValue: Int): BunnyState {
-        return BunnyState(
-                a = aValue,
-                b = this.b,
-                c = this.c,
-                d = this.d
-        )
-    }
-    fun setB(bValue: Int): BunnyState {
-        return BunnyState(
-                a = this.a,
-                b = bValue,
-                c = this.c,
-                d = this.d
-        )
-    }
-    fun setC(cValue: Int): BunnyState {
-        return BunnyState(
-                a = this.a,
-                b = this.b,
-                c = cValue,
-                d = this.d
-        )
-    }
-    fun setD(dValue: Int): BunnyState {
-        return BunnyState(
-                a = this.a,
-                b = this.b,
-                c = this.c,
-                d = dValue
-        )
+
+    fun set(a: Int = this.a,
+            b: Int = this.b,
+            c: Int = this.c,
+            d: Int = this.d): BunnyState = BunnyState(a,b,c,d)
+
+    fun inc(register: Register): BunnyState {
+
+        var a = this.a
+        var b = this.b
+        var c = this.c
+        var d = this.d
+
+        when(register){
+            A -> a += 1
+            B -> b += 1
+            C -> c += 1
+            D -> d += 1
+        }
+
+        return BunnyState(a,b,c,d)
     }
 
-    fun incA(): BunnyState {
-        return BunnyState(
-                a = this.a + 1,
-                b = this.b,
-                c = this.c,
-                d = this.d
-        )
-    }
-    fun incB(): BunnyState {
-        return BunnyState(
-                a = this.a,
-                b = this.b + 1,
-                c = this.c,
-                d = this.d
-        )
-    }
-    fun incC(): BunnyState {
-        return BunnyState(
-                a = this.a,
-                b = this.b,
-                c = this.c + 1,
-                d = this.d
-        )
-    }
-    fun incD(): BunnyState {
-        return BunnyState(
-                a = this.a,
-                b = this.b,
-                c = this.c,
-                d = this.d + 1
-        )
-    }
+    fun dec(register: Register): BunnyState {
 
-    fun decA(): BunnyState {
-        return BunnyState(
-                a = this.a - 1,
-                b = this.b,
-                c = this.c,
-                d = this.d
-        )
-    }
-    fun decB(): BunnyState {
-        return BunnyState(
-                a = this.a,
-                b = this.b - 1,
-                c = this.c,
-                d = this.d
-        )
-    }
-    fun decC(): BunnyState {
-        return BunnyState(
-                a = this.a,
-                b = this.b,
-                c = this.c - 1,
-                d = this.d
-        )
-    }
-    fun decD(): BunnyState {
-        return BunnyState(
-                a = this.a,
-                b = this.b,
-                c = this.c,
-                d = this.d - 1
-        )
+        var a = this.a
+        var b = this.b
+        var c = this.c
+        var d = this.d
+
+        when(register){
+            A -> a -= 1
+            B -> b -= 1
+            C -> c -= 1
+            D -> d -= 1
+        }
+
+        return BunnyState(a,b,c,d)
     }
 
 }

@@ -43,29 +43,23 @@ class AssemBunnyCodeRunner {
         }
     }
 
-    private fun runDecInstruction(registerValue: String, state: BunnyState): BunnyState = when(registerValue){
-        A.value -> state.decA()
-        B.value -> state.decB()
-        C.value -> state.decC()
-        else -> state.decD()
+    private fun runDecInstruction(registerValue: String, state: BunnyState): BunnyState = state.dec(getRegister(registerValue))
 
+    private fun runIncInstruction(registerValue: String, state: BunnyState): BunnyState = state.inc(getRegister(registerValue))
+
+    private fun getRegister(registerValue: String): Register {
+        return Register.values()
+                .find { it.value == registerValue }!!
     }
 
-    private fun runIncInstruction(registerValue: String, state: BunnyState): BunnyState = when(registerValue){
-        A.value -> state.incA()
-        B.value -> state.incB()
-        C.value -> state.incC()
-        else -> state.incD()
-
-    }
 
     private fun runCopyInstruction(instructionParts: List<String>, state: BunnyState): BunnyState {
         val amountToSet = getAmountToSetBy(instructionParts[1], state)
         return when (instructionParts[2]) {
-            A.value -> state.setA(amountToSet)
-            B.value -> state.setB(amountToSet)
-            C.value -> state.setC(amountToSet)
-            else -> state.setD(amountToSet)
+            A.value -> state.set(a = amountToSet)
+            B.value -> state.set(b = amountToSet)
+            C.value -> state.set(c = amountToSet)
+            else -> state.set(d = amountToSet)
         }
     }
 
@@ -83,6 +77,7 @@ enum class Register(val value: String) {
     B("b"),
     C("c"),
     D("d")
+
 }
 
 enum class Instruction(val value: String){
