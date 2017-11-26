@@ -1,15 +1,15 @@
 package com.github.shmvanhouten.adventofcode.day5
 
-class PasswordFinder(val hashUtil: HashUtil = HashUtil()) {
+class PasswordFinder(private val hashUtil: HashUtil = HashUtil()) {
 
     fun calculatePasswordForFirstDoor(doorId: String): String {
         val passwordBuilder = StringBuilder()
 
         var index = 0
         while (passwordBuilder.length < 8) {
-            val sixthHexaDecimal = hashUtil.hashStringIfItStartsWith00000(doorId + index)
-            if (sixthHexaDecimal != null) {
-                passwordBuilder.append(sixthHexaDecimal)
+            val sixthHexadecimal = hashUtil.hashStringIfItStartsWith00000(doorId + index)
+            if (sixthHexadecimal != null) {
+                passwordBuilder.append(sixthHexadecimal)
             }
             index++
         }
@@ -22,9 +22,9 @@ class PasswordFinder(val hashUtil: HashUtil = HashUtil()) {
 
         var index = 0
         while (password.size < 8) {
-            val sixthAndSeventhHexaDecimal = hashUtil.hashStringIfItStartsWith00000xWherexIs1to7inc(doorId + index)
-            if(sixthAndSeventhHexaDecimal != null && !password.containsKey(sixthAndSeventhHexaDecimal.first)){
-                password.put(sixthAndSeventhHexaDecimal.first, sixthAndSeventhHexaDecimal.second)
+            val sixthAndSeventhHexadecimal = hashUtil.hashStringIfItStartsWith00000xWherexIs1to7inc(doorId + index)
+            if(sixthAndSeventhHexadecimal != null && !password.containsKey(sixthAndSeventhHexadecimal.first)){
+                password.put(sixthAndSeventhHexadecimal.first, sixthAndSeventhHexadecimal.second)
             }
             index++
         }
