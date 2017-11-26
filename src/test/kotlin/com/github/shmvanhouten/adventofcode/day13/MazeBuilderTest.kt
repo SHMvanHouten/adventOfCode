@@ -18,7 +18,7 @@ fun Maze.draw() {
     for(y in 0.until(this.height)){
         val rowRepBuilder = StringBuilder()
         for(x in 0.until(this.width)){
-            val mazeComponentChar = if(this.getCoordinate(x,y) == WALL) '#' else '.'
+            val mazeComponentChar = if(this.getComponent(x,y) == WALL) '#' else '.'
             rowRepBuilder.append(mazeComponentChar)
         }
         println(rowRepBuilder.toString())

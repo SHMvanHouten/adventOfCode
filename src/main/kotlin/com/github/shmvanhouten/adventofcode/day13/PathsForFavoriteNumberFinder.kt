@@ -5,7 +5,7 @@ class PathsForFavoriteNumberFinder(private val mazeBuilder: MazeBuilder = MazeBu
     fun findQuickestPathLengthForCoordinate(numberToDrawMaze: Int, targetCoordinate: Coordinate): Int {
         val maze = mazeBuilder.build(numberToDrawMaze)
 
-        val pathsToVisitedNodes = pathFinder.getPathsToVisitedNodes(emptyList())
+        val pathsToVisitedNodes = pathFinder.getPathsToVisitedNodes(maze)
 
         return pathsToVisitedNodes.find { it.coordinate == targetCoordinate }?.shortestPath?.size ?: -1
     }
@@ -13,7 +13,7 @@ class PathsForFavoriteNumberFinder(private val mazeBuilder: MazeBuilder = MazeBu
     fun countHowManyCoordinatesTakeLessThan50Steps(numberToDrawMaze: Int): Int {
         val maze = mazeBuilder.build(numberToDrawMaze)
 
-        val pathsToVisitedNodes = pathFinder.getPathsToVisitedNodes(emptyList())
+        val pathsToVisitedNodes = pathFinder.getPathsToVisitedNodes(maze)
 
         return pathsToVisitedNodes.count { it.shortestPath.size <= 50 }
     }

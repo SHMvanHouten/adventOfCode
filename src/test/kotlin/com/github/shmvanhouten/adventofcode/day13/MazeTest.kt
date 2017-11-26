@@ -17,19 +17,23 @@ class MazeTest {
         )
         val maze = buildMazeFromMazeRepresentation(mazeRepresentation)
         maze.draw()
-        assertThat(maze.getCoordinate(2,0), equalTo(WALL))
-        assertThat(maze.getCoordinate(1,1), equalTo(CORRIDOR))
+        assertThat(maze.getComponent(2,0), equalTo(WALL))
+        assertThat(maze.getComponent(1,1), equalTo(CORRIDOR))
     }
 
     @Test
-    fun `draw maze`() {
+    fun `it should give the adjacent corridors for 1,1`() {
         val mazeRepresentation = listOf(
-                "....",
-                "....",
+                ".#..",
+                "..#.",
                 "...#",
                 "...#"
         )
+
         val maze = buildMazeFromMazeRepresentation(mazeRepresentation)
+        val adjacentCorridors: List<Coordinate> = maze.getAdjacentCorridors(Coordinate(1,1))
         maze.draw()
+        assertThat(adjacentCorridors.size, equalTo(2))
+        assertThat(adjacentCorridors[0], equalTo(Coordinate(0,1)))
     }
 }

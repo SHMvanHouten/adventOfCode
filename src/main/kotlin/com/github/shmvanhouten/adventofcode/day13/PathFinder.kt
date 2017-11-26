@@ -1,9 +1,11 @@
 package com.github.shmvanhouten.adventofcode.day13
 
+import com.github.shmvanhouten.adventofcode.day13.MazeComponent.*
+
 class PathFinder {
     private val SOURCE_COORDINATE = Coordinate(1, 1)
 
-    fun getPathsToVisitedNodes(maze: List<List<Int>>): Set<Node> {
+    fun getPathsToVisitedNodes(maze: Maze): Set<Node> {
         var unvisitedNodes = setOf<Node>()
         var visitedNodes = setOf<Node>()
 
@@ -32,7 +34,7 @@ class PathFinder {
             }
             val possibleVisitedNode: Node? = visitedNodes.find { it.coordinate == currentNode.coordinate }
             if (possibleVisitedNode != null) {
-                if (possibleVisitedNode.shortestPath.size > currentNode.shortestPath.size){
+                if (possibleVisitedNode.shortestPath.size > currentNode.shortestPath.size) {
                     visitedNodes -= possibleVisitedNode
                     visitedNodes += currentNode
                 }
@@ -51,26 +53,10 @@ class PathFinder {
         return Node(nodeToGivePathTo.coordinate, currentPath)
     }
 
-    private fun findAdjacentNodes(originCoordinate: Coordinate, maze: List<List<Int>>): List<Node> {
-        val possibleAdjacent = listOf(
-                Coordinate(originCoordinate.x - 1, originCoordinate.y),
-                Coordinate(originCoordinate.x + 1, originCoordinate.y),
-                Coordinate(originCoordinate.x, originCoordinate.y - 1),
-                Coordinate(originCoordinate.x, originCoordinate.y + 1))
-        return possibleAdjacent
-                .filter {
-                    !isItAWall(maze, it)
-                }
+    private fun findAdjacentNodes(originCoordinate: Coordinate, maze: Maze): List<Node> =
+        maze.getAdjacentCorridors(originCoordinate)
                 .map { Node(it) }
-    }
 
-    private fun isItAWall(maze: List<List<Int>>, it: Coordinate): Boolean {
-        return try {
-            maze[it.y][it.x] == 0
-        } catch (e: IndexOutOfBoundsException) {
-            true
-        }
-    }
 
     private fun getLowestDistanceNode(unvisitedNodes: Set<Node>): Node =
             unvisitedNodes.minBy { it.shortestPath.size } ?: unvisitedNodes.first()

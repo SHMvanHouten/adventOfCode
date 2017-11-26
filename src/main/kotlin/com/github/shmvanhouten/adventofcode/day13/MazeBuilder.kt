@@ -9,7 +9,6 @@ class MazeBuilder {
                 if(shouldBuildWall(x, y, inputNumber)){
                     maze.buildWall(x,y)
                 }
-
             }
         }
         return maze
