@@ -10,7 +10,13 @@ class PathsForFavoriteNumberFinderTest {
     fun `it should find the shortest path to 31,39 for the challenge maze`() {
         val pathsFinder = PathsForFavoriteNumberFinder()
 
-        assertThat(pathsFinder.findQuickestPathLengthForCoordinate(1352, Coordinate(31, 39)), equalTo(90))
+        val quickestPath = pathsFinder.findQuickestPathForCoordinate(1352, Coordinate(31, 39))
+
+        assertThat(quickestPath?.size, equalTo(90))
+
+        val mazeBuilder = MazeBuilder()
+        val maze = mazeBuilder.build(1352)
+        maze.draw(quickestPath!!)
     }
 
 
@@ -20,7 +26,6 @@ class PathsForFavoriteNumberFinderTest {
         val pathsFinder = PathsForFavoriteNumberFinder()
 
         val amountOfSteps = pathsFinder.countHowManyCoordinatesTakeLessThan50Steps(1352)
-        println(amountOfSteps)
-
+        assertThat(amountOfSteps, equalTo(135))
     }
 }

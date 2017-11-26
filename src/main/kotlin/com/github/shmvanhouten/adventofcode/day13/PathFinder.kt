@@ -14,7 +14,7 @@ class PathFinder {
 
             buildAdjacentNodes(currentNode, maze)
                     .forEach { adjacentNode ->
-                        
+
                 val possibleVisitedNode: Node? = visitedNodes.find { it == adjacentNode }
                 if (possibleVisitedNode != null) {
 
@@ -39,27 +39,21 @@ class PathFinder {
         var newVisitedNodes = originalVisitedNodes
         val possibleVisitedNode: Node? = newVisitedNodes.find { it == currentNode }
         if (possibleVisitedNode != null) {
+
             if (possibleVisitedNode.shortestPath.size > currentNode.shortestPath.size) {
                 newVisitedNodes -= possibleVisitedNode
                 newVisitedNodes += currentNode
-            } else {
-                //keep the original visited node with the shorter path
-            }
+            } // else keep the original visited node with the shorter path
+
         } else {
             newVisitedNodes += currentNode
         }
         return newVisitedNodes
     }
 
-    private fun calculatePathToNode(previousNode: Node, nodeToGivePathTo: Node): Node {
-        val currentPath = previousNode.shortestPath.plus(nodeToGivePathTo)
-        return Node(nodeToGivePathTo.coordinate, currentPath)
-    }
-
     private fun buildAdjacentNodes(originNode: Node, maze: Maze): List<Node> =
             maze.getAdjacentCorridors(originNode.coordinate)
-                    .map { Node(it) }
-                    .map { calculatePathToNode(originNode, it) }
+                    .map { Node(it, shortestPath = originNode.shortestPath.plus(it)) }
 
 
     private fun getLowestDistanceNode(unvisitedNodes: Set<Node>): Node =
