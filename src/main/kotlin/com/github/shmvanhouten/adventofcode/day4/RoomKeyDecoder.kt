@@ -3,10 +3,12 @@ package com.github.shmvanhouten.adventofcode.day4
 class RoomKeyDecoder {
 
     fun checkIfRoomsAreReal(keys: String): Int {
-        return keys.split("\n").sumBy { checkIfRoomIsReal(it.trim()) }
+        return keys
+                .split("\n")
+                .sumBy { checkIfRoomIsReal(it.trim()) }
     }
 
-    fun getListOfValidRooms(encodedRoomNames: String): List<Pair<List<String>, Int>> {
+    fun getListOfValidRooms(encodedRoomNames: String): List<Room> {
         return encodedRoomNames.split("\n").mapNotNull { getRealRoom(it.trim()) }
     }
 
@@ -19,12 +21,14 @@ class RoomKeyDecoder {
         else 0
     }
 
-    private fun getRealRoom(key: String): Pair<List<String>, Int>? {
-        val (name:List<String>, sectorId: Int, checkSum: String) = retrieveRoomIdentifiersFromKey(key)
+    private fun getRealRoom(key: String): Room? {
+        val (name:List<String>,
+                sectorId: Int,
+                checkSum: String) = retrieveRoomIdentifiersFromKey(key)
 
         val expectedRoomKey = getFiveCharactersMostRepresentedInTheName(name)
 
-        return if (checkSum == expectedRoomKey) Pair(name, sectorId)
+        return if (checkSum == expectedRoomKey) Room(name, sectorId)
         else null
     }
 
@@ -40,17 +44,23 @@ class RoomKeyDecoder {
 
         val roomKey = StringBuilder()
 
-        run breaker@{sortedCharacters.forEachIndexed { index, char -> roomKey.append(char); if (index == 4) return@breaker}}
+        for (indexedChar in sortedCharacters.withIndex()) {
+            roomKey.append(indexedChar.value)
+            if(indexedChar.index >= 4) break
+        }
+//        run breaker@{sortedCharacters.forEachIndexed { index, char -> roomKey.append(char); if (index == 4) return@breaker}}
 
         return roomKey.toString()
     }
 
-    private fun sortCharactersByQuantityAndAlphabet(name: String): MutableSet<Char> {
-        val characterToAmountMap = name.associateBy({ it }, { countHowManyCharactersAreInName(it, name) })
-        return characterToAmountMap.toSortedMap(compareByDescending<Char> { characterToAmountMap[it] }.thenBy { it }).keys
+    private fun sortCharactersByQuantityAndAlphabet(roomName: String): MutableSet<Char> {
+        val characterToAmountMap = roomName.associateBy({ it }, { countTimesCharacterIsInRoomName(it, roomName) })
+        return characterToAmountMap
+                .toSortedMap(compareByDescending<Char> { characterToAmountMap.getValue(it) }.thenBy { it })
+                .keys
     }
 
-    private fun countHowManyCharactersAreInName(char: Char, name: String): Int {
+    private fun countTimesCharacterIsInRoomName(char: Char, name: String): Int {
         return name.count { it == char }
     }
 }
