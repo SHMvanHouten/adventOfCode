@@ -45,7 +45,6 @@ class PathFinderTest {
 
         assertThat(pathsToVisitedNodes.size, equalTo(10))
     }
-
 }
 
 fun drawMaze(maze: List<List<Int>>) {

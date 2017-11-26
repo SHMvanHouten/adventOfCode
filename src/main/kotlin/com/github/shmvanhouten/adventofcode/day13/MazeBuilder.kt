@@ -2,22 +2,24 @@ package com.github.shmvanhouten.adventofcode.day13
 
 class MazeBuilder {
 
-    fun build(inputNumber: Int, sizeOfMazeSides: IntRange = 0..50): List<List<Int>> {
-        val coordinates = mutableListOf<MutableList<Int>>()
-        for (y in sizeOfMazeSides) {
-            coordinates.add(mutableListOf())
-            for (x in sizeOfMazeSides) {
-                coordinates[y].add(isCoordinateOpenSpaceOrWall(x, y, inputNumber).toInt())
+    fun build(inputNumber: Int, sizeOfMazeSides: Int = 50): Maze {
+        val maze = Maze(sizeOfMazeSides, sizeOfMazeSides)
+        for (y in 0.until(maze.height)) {
+            for (x in 0.until(maze.width)) {
+                if(shouldBuildWall(x, y, inputNumber)){
+                    maze.buildWall(x,y)
+                }
+
             }
         }
-        return coordinates
+        return maze
     }
 
-    private fun isCoordinateOpenSpaceOrWall(x: Int, y: Int, inputNumber: Int): Boolean {
+    private fun shouldBuildWall(x: Int, y: Int, inputNumber: Int): Boolean {
         val decimalRepresentation = x * x + 3 * x + 2 * x * y + y + y * y + inputNumber
         val binaryRepresentation = decimalRepresentation.toBinary()
         val amountOf1sInBinary = binaryRepresentation.count { it == '1' }
-        return amountOf1sInBinary % 2 == 0
+        return amountOf1sInBinary % 2 != 0
     }
 }
 

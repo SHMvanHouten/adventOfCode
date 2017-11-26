@@ -1,5 +1,6 @@
 package com.github.shmvanhouten.adventofcode.day13
 
+import com.github.shmvanhouten.adventofcode.day13.MazeComponent.WALL
 import org.junit.Test
 
 
@@ -9,8 +10,17 @@ class MazeBuilderTest{
     fun `it should create a maze`() {
         val mazeBuilder = MazeBuilder()
         val maze = mazeBuilder.build(1352)
-        maze
-                .map { line -> line.map { if(it == 0) '#' else '.' } }
-                .forEach { println(it.joinToString("")) }
+        maze.draw()
+    }
+}
+
+fun Maze.draw() {
+    for(y in 0.until(this.height)){
+        val rowRepBuilder = StringBuilder()
+        for(x in 0.until(this.width)){
+            val mazeComponentChar = if(this.getCoordinate(x,y) == WALL) '#' else '.'
+            rowRepBuilder.append(mazeComponentChar)
+        }
+        println(rowRepBuilder.toString())
     }
 }
