@@ -7,7 +7,7 @@ import java.security.MessageDigest
  * with thanks to Sam Clarke <www.samclarke.com>
  */
 
-class HashUtil {
+class AdaptedHashUtil {
     private val HEX_CHARS = "0123456789abcdef"
     private val MD5 = "MD5"
 

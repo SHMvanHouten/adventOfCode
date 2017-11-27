@@ -1,6 +1,6 @@
 package com.github.shmvanhouten.adventofcode.day5
 
-class PasswordFinder(private val hashUtil: HashUtil = HashUtil()) {
+class PasswordFinder(private val hashUtil: AdaptedHashUtil = AdaptedHashUtil()) {
 
     fun calculatePasswordForFirstDoor(doorId: String): String {
         val passwordBuilder = StringBuilder()
