@@ -1,7 +1,7 @@
 package com.github.shmvanhouten.adventofcode.day14
 
 
-class HashFilter(private val salt: String, private val hashUtil: HashUtil = HashUtil) {
+abstract class HashFilter(private val salt: String, private val hashUtil: HashUtil) {
     fun getNext(indexToStart: Int): PadKey {
         var possiblePadKey: PadKey? = null
 
@@ -9,7 +9,7 @@ class HashFilter(private val salt: String, private val hashUtil: HashUtil = Hash
 
         var index = indexToStart
         while (possiblePadKey == null){
-            val md5Hash = hashUtil.hashMd5(salt + index)
+            val md5Hash = hashSalt(index)
             val matchedString = regex.find(md5Hash)
             if(matchedString != null){
                 possiblePadKey = PadKey(index, md5Hash, matchedString.value[0])
@@ -18,6 +18,9 @@ class HashFilter(private val salt: String, private val hashUtil: HashUtil = Hash
         }
         return possiblePadKey
     }
+
+    abstract fun hashSalt(index: Int): String
+//    private fun hashSalt(index: Int) = hashUtil.hashMd5(salt + index)
 
 
 }

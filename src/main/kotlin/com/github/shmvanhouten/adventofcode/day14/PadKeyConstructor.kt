@@ -1,8 +1,7 @@
 package com.github.shmvanhouten.adventofcode.day14
 
-class PadKeyConstructor() {
-    fun getKeys(amount: Int, salt: String): List<PadKey> {
-        val hashFilter = HashFilter(salt)
+class PadKeyConstructor(private val hashFilter: HashFilter) {
+    fun getKeys(amount: Int): List<PadKey> {
 
         var possiblePadKeys = setOf<PadKey>()
         var foundPadKeys = setOf<PadKey>()

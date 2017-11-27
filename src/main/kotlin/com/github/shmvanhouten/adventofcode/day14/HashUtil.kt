@@ -11,7 +11,7 @@ object HashUtil {
     fun hashMd5(input: String) = hashString("MD5", input)
 
     private fun hashString(type: String, input: String): String {
-        val HEX_CHARS = "0123456789ABCDEF"
+        val HEX_CHARS = "0123456789abcdef"
         val bytes = MessageDigest
                 .getInstance(type)
                 .digest(input.toByteArray())
