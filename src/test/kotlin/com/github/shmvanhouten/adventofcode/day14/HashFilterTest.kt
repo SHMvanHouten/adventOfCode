@@ -8,8 +8,8 @@ class HashFilterTest {
 
     @Test
     fun `it should get the first hash that contains three of the same character in a row`() {
-        val hashFilter = HashFilter()
-        val possiblePadKey: PadKey = hashFilter.getNext(0, "abc")
+        val hashFilter = HashFilter("abc")
+        val possiblePadKey: PadKey = hashFilter.getNext(0)
         assertThat(possiblePadKey.index, equalTo(18))
     }
 }
