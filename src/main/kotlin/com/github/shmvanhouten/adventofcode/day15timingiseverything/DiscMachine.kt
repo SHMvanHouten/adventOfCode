@@ -6,13 +6,8 @@ data class DiscMachine(val discs: Map<Int, Disc> = mapOf()){
         return DiscMachine(discs.plus(discs.size + 1 to inputDisc))
     }
 
-    fun addSecond(): DiscMachine {
-        val movedDiscs = discs.map { it.key to it.value.move() }.toMap()
-        return DiscMachine(movedDiscs)
-    }
-
-    fun addSeconds(amountOfMoves: Int): DiscMachine {
-        val movedDiscs = discs.map { it.key to it.value.move(amountOfMoves) }.toMap()
+    fun addSeconds(amount: Int): DiscMachine {
+        val movedDiscs = discs.map { it.key to it.value.move(amount) }.toMap()
         return DiscMachine(movedDiscs)
     }
 }

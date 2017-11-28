@@ -12,11 +12,11 @@ class CapsuleDropTimeFinder {
     private fun runSimulation(originalStateMachine: DiscMachine, timeToStart: Int): Boolean {
         var discMachine = originalStateMachine.addSeconds(timeToStart)
 
-        val timeRange = 1..discMachine.discs.size
+        val discRange = 1..discMachine.discs.size
 
-        for (time in timeRange) {
-            discMachine = discMachine.addSecond()
-            if (discMachine.discs.getValue(time).currentPosition != 0) {
+        for (discPositionCapsuleIsAt in discRange) {
+            discMachine = discMachine.addSeconds(1)
+            if (discMachine.discs.getValue(discPositionCapsuleIsAt).currentPosition != 0) {
                 return false
             }
         }
