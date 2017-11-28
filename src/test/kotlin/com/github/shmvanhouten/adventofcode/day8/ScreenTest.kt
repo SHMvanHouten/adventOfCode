@@ -1,5 +1,6 @@
 package com.github.shmvanhouten.adventofcode.day8
 
+import com.github.shmvanhouten.adventofcode.day8.PixelState.*
 import com.natpryce.hamkrest.assertion.assertThat
 import com.natpryce.hamkrest.equalTo
 import org.junit.Test
@@ -11,7 +12,7 @@ class ScreenTest {
         val screen = Screen(5, 5)
         screen.turnOnPixelsTopLeft(1,1)
         assertThat(screen.amountOfPixelsLit(), equalTo(1))
-        assertThat(screen.getPixel(0,4), equalTo(false))
+        assertThat(screen.getPixel(0,4), equalTo(OFF))
     }
 
     @Test
@@ -19,7 +20,7 @@ class ScreenTest {
         val screen = Screen(5, 5)
         screen.turnOnPixelsTopLeft(2,1)
         assertThat(screen.amountOfPixelsLit(), equalTo(2))
-        assertThat(screen.getPixel(1,4), equalTo(false))
+        assertThat(screen.getPixel(1,4), equalTo(OFF))
     }
 
     @Test
@@ -27,7 +28,7 @@ class ScreenTest {
         val screen = Screen(5, 5)
         screen.turnOnPixelsTopLeft(3,4)
         assertThat(screen.amountOfPixelsLit(), equalTo(12))
-        assertThat(screen.getPixel(1,1), equalTo(true))
+        assertThat(screen.getPixel(1,1), equalTo(ON))
     }
 
     @Test
@@ -36,8 +37,8 @@ class ScreenTest {
         screen.turnOnPixelsTopLeft(3,4)
         screen.rotateRowByAmount(1, 1)
         assertThat(screen.amountOfPixelsLit(), equalTo(12))
-        assertThat(screen.getPixel(0,1), equalTo(false))
-        assertThat(screen.getPixel(3,1), equalTo(true))
+        assertThat(screen.getPixel(0,1), equalTo(OFF))
+        assertThat(screen.getPixel(3,1), equalTo(ON))
     }
 
     @Test
@@ -46,8 +47,8 @@ class ScreenTest {
         screen.turnOnPixelsTopLeft(3,3)
         screen.rotateColumnByAmount(2, 3)
         assertThat(screen.amountOfPixelsLit(), equalTo(9))
-        assertThat(screen.getPixel(2,4), equalTo(true))
-        assertThat(screen.getPixel(2,0), equalTo(true))
-        assertThat(screen.getPixel(2,3), equalTo(true))
+        assertThat(screen.getPixel(2,4), equalTo(ON))
+        assertThat(screen.getPixel(2,0), equalTo(ON))
+        assertThat(screen.getPixel(2,3), equalTo(ON))
     }
 }

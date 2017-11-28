@@ -1,5 +1,6 @@
 package com.github.shmvanhouten.adventofcode.day8
 
+import com.github.shmvanhouten.adventofcode.day8.PixelState.*
 import com.natpryce.hamkrest.assertion.assertThat
 import com.natpryce.hamkrest.equalTo
 import org.junit.Test
@@ -28,7 +29,7 @@ class ScreenDrawerTest {
         val screenDrawer = ScreenDrawer(screen)
         screenDrawer.drawOnScreen("rect 4x2")
         screenDrawer.drawOnScreen("rotate column x=1 by 1")
-        assertThat(screen.getPixel(1,4), equalTo(false))
+        assertThat(screen.getPixel(1,4), equalTo(OFF))
     }
 
     @Test
@@ -38,8 +39,8 @@ class ScreenDrawerTest {
         screenDrawer.drawOnScreen("rect 4x2")
         screenDrawer.drawOnScreen("rotate column x=1 by 3")
         screenDrawer.drawOnScreen("rotate row y=1 by 1")
-        assertThat(screen.getPixel(1,1), equalTo(true))
-        assertThat(screen.getPixel(2,1), equalTo(false))
+        assertThat(screen.getPixel(1,1), equalTo(ON))
+        assertThat(screen.getPixel(2,1), equalTo(OFF))
     }
 
     @Test
