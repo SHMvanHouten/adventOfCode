@@ -5,8 +5,8 @@ import com.github.shmvanhouten.adventofcode.day17twostepsforward.RelativePositio
 class RoomMapBuilder {
     fun buildRoomMap(rawRoomMap: String): RoomMap {
         val rows = rawRoomMap.split("\n")
-        val width = (rows[0].length - 2) / 2
-        val height = (rows.size - 2) / 2
+        val width = (rows[0].length - 1) / 2
+        val height = (rows.size - 1) / 2
 
         val roomMap = mutableMapOf<Coordinate, Room>()
         for (y in 0.until(height)) {

@@ -12,7 +12,7 @@ class ShortestPathToVaultFinderTest {
         val roomMap = buildSmallRoomMap()
         val doorLockStateAscertainer = DoorLockStateAscertainerMockImpl()
         val shortestPathFinder = ShortestPathToVaultFinder(roomMap, doorLockStateAscertainer)
-        assertThat(shortestPathFinder.findShortestPath(), equalTo("DR"))
+        assertThat(shortestPathFinder.findShortestPath("1234"), equalTo("DR"))
     }
 
     private fun buildSmallRoomMap(): RoomMap {

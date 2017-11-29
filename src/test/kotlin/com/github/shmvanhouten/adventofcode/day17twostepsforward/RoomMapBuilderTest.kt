@@ -19,7 +19,7 @@ class RoomMapBuilderTest {
 # | | |
 ####### V"""
         val roomMap = roomMapBuilder.buildRoomMap(rawInput)
-        assertThat(roomMap.rooms.size, equalTo(9))
+        assertThat(roomMap.rooms.size, equalTo(16))
         roomMap.rooms.forEach { println(it) }
     }
 }
