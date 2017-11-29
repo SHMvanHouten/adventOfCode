@@ -1,7 +1,5 @@
 package com.github.shmvanhouten.adventofcode.day17twostepsforward
 
-import com.github.shmvanhouten.adventofcode.day17twostepsforward.DoorState.OPEN
-
 class ShortestPathToVaultFinder(private val roomMap: RoomMap, private val doorLockStateDecoder: DoorLockStateDecoder): PathToVaultFinder(roomMap, doorLockStateDecoder) {
 
     override fun find(passCode: String): String {
