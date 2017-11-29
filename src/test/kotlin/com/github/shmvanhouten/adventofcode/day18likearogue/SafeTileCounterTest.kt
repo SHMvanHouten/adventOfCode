@@ -14,10 +14,18 @@ class SafeTileCounterTest {
     }
 
     @Test
-    fun `it should count the safe tiles in the TileFloor drawn from the challenge input`() {
+    fun `it should count the safe tiles in the TileFloor with 40 rows drawn from the challenge input`() {
         val safeTileCounter = SafeTileCounter()
         val firstRow = ".^^^.^.^^^.^.......^^.^^^^.^^^^..^^^^^.^.^^^..^^.^.^^..^.^..^^...^.^^.^^^...^^.^.^^^..^^^^.....^...."
         assertThat(safeTileCounter.countForRawInput(firstRow, 40), equalTo(2013))
     }
+
+    @Test
+    fun `it should count the safe tiles in the TileFloor with 400000 rows drawn from the challenge input`() {
+        val safeTileCounter = SafeTileCounter()
+        val firstRow = ".^^^.^.^^^.^.......^^.^^^^.^^^^..^^^^^.^.^^^..^^.^.^^..^.^..^^...^.^^.^^^...^^.^.^^^..^^^^.....^...."
+        assertThat(safeTileCounter.countForRawInput(firstRow, 400000), equalTo(20006289))
+    }
+
 
 }
