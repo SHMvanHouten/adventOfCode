@@ -1,32 +1,32 @@
 package com.github.shmvanhouten.adventofcode.day17twostepsforward
 
-import com.github.shmvanhouten.adventofcode.day17twostepsforward.DoorState.OPEN
-
-class ShortestPathToVaultFinder(private val roomMap: RoomMap, private val doorLockStateDecoder: DoorLockStateDecoder) {
-    fun findShortestPath(passCode: String): String {
+class LongestPathToVaultFinder(private val roomMap: RoomMap, private val doorLockStateDecoder: DoorLockStateDecoder) {
+    fun findLongestPath(passCode: String): Int {
         val vaultRoom = roomMap.rooms.keys.maxBy { it }
 
         val doorsAdjacent = doorLockStateDecoder.findLockStateForDoorsAdjacent(passCode)
         var unTakenPaths = setOf<Path>(Path(passCode, roomMap.rooms.getValue(Coordinate(0, 0)), doorsAdjacent))
+
+        var pathsToVault = listOf<String>()
 
 
         while (unTakenPaths.isNotEmpty()) {
             val unTakenPath = getShortestPossiblePath(unTakenPaths)
             unTakenPaths -= unTakenPath
 
-            val relativePositionsWithOpenDoor = unTakenPath.currentRoom.adjacentRooms
-                    .filter { unTakenPath.doorsToAdjacentRooms.getDoorStateForRelativePosition(it.key) == OPEN }
+            var relativePositionsWithOpenDoor = unTakenPath.currentRoom.adjacentRooms
+                    .filter { unTakenPath.doorsToAdjacentRooms.getDoorStateForRelativePosition(it.key) == DoorState.OPEN }
 
             val possiblePathToVaultRoom = relativePositionsWithOpenDoor.filter { it.value == vaultRoom }
             if (possiblePathToVaultRoom.isNotEmpty()) {
-                return possiblePathToVaultRoom.map { buildPath(unTakenPath, it) }[0].passCode.substringAfter(passCode)
-            } else {
-                unTakenPaths += relativePositionsWithOpenDoor.map { buildPath(unTakenPath, it) }
+                pathsToVault += possiblePathToVaultRoom.map { buildPath(unTakenPath, it) }[0].passCode.substringAfter(passCode)
+                relativePositionsWithOpenDoor -= (possiblePathToVaultRoom.keys)
             }
+            unTakenPaths += relativePositionsWithOpenDoor.map { buildPath(unTakenPath, it) }
+
 
         }
-        println("No Path Found")
-        return "-1"
+        return pathsToVault.maxBy { it.length }?.length ?: -1
     }
 
     private fun buildPath(possiblePath: Path, entry: Map.Entry<RelativePosition, Coordinate>): Path {

@@ -40,7 +40,7 @@ class ShortestPathToVaultFinderTest {
     }
 
     @Test
-    fun `it should find the path for challenge input passcode bwnlcvfs`() {
+    fun `it should find the path DDURRLRRDD for challenge input passcode bwnlcvfs`() {
         val roomMap = buildStandardRoomMap()
         val doorLockStateAscertainer = DoorLockStateDecoderMd5Impl()
         val shortestPathFinder = ShortestPathToVaultFinder(roomMap, doorLockStateAscertainer)
@@ -61,9 +61,11 @@ class ShortestPathToVaultFinderTest {
     }
 
 
-    private fun buildStandardRoomMap(): RoomMap {
-        val roomMapBuilder = RoomMapBuilder()
-        val rawInput = """#########
+}
+
+fun buildStandardRoomMap(): RoomMap {
+    val roomMapBuilder = RoomMapBuilder()
+    val rawInput = """#########
     #S| | | #
     #-#-#-#-#
     # | | | #
@@ -72,6 +74,5 @@ class ShortestPathToVaultFinderTest {
     #-#-#-#-#
     # | | |
     ####### V"""
-        return roomMapBuilder.buildRoomMap(rawInput)
-    }
+    return roomMapBuilder.buildRoomMap(rawInput)
 }
