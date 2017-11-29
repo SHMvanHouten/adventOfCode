@@ -20,7 +20,6 @@ abstract class HashFilter(private val salt: String, private val hashUtil: HashUt
     }
 
     abstract fun hashSalt(index: Int): String
-//    private fun hashSalt(index: Int) = hashUtil.hashMd5(salt + index)
 
 
 }

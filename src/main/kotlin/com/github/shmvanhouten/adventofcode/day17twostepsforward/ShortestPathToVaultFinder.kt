@@ -2,11 +2,11 @@ package com.github.shmvanhouten.adventofcode.day17twostepsforward
 
 import com.github.shmvanhouten.adventofcode.day17twostepsforward.DoorState.OPEN
 
-class ShortestPathToVaultFinder(private val roomMap: RoomMap, private val doorLockStateAscertainer: DoorLockStateAscertainer) {
+class ShortestPathToVaultFinder(private val roomMap: RoomMap, private val doorLockStateDecoder: DoorLockStateDecoder) {
     fun findShortestPath(passCode: String): String {
         val vaultRoom = roomMap.rooms.keys.maxBy { it }
 
-        val doorsAdjacent = doorLockStateAscertainer.findLockStateForDoorsAdjacent(passCode)
+        val doorsAdjacent = doorLockStateDecoder.findLockStateForDoorsAdjacent(passCode)
         var unTakenPaths = setOf<Path>(Path(passCode, roomMap.rooms.getValue(Coordinate(0, 0)), doorsAdjacent))
 
 
@@ -31,7 +31,7 @@ class ShortestPathToVaultFinder(private val roomMap: RoomMap, private val doorLo
     private fun buildPath(possiblePath: Path, entry: Map.Entry<RelativePosition, Coordinate>): Path {
         val passCode = possiblePath.passCode + entry.key.charRepresentation
         val currentRoom = roomMap.rooms.getValue(entry.value)
-        val lockStateForDoorsAdjacent = doorLockStateAscertainer.findLockStateForDoorsAdjacent(passCode)
+        val lockStateForDoorsAdjacent = doorLockStateDecoder.findLockStateForDoorsAdjacent(passCode)
         return Path(passCode, currentRoom, lockStateForDoorsAdjacent)
     }
 
