@@ -32,7 +32,7 @@ class ElfPartySimulatorTest {
     }
 
 
-    @Test @Ignore
+    @Test
     fun `it should find which elf gets all the presents for the challenge input number of elves, 3018458`() {
         val elfPartySimulator = ElfPartySimulator()
         assertThat(elfPartySimulator.getLuckyElf(3018458), equalTo(3))
