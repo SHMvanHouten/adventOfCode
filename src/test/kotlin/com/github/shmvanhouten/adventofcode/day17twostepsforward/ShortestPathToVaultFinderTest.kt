@@ -12,7 +12,7 @@ class ShortestPathToVaultFinderTest {
         val roomMap = buildSmallRoomMap()
         val doorLockStateAscertainer = DoorLockStateDecoderMockImpl()
         val shortestPathFinder = ShortestPathToVaultFinder(roomMap, doorLockStateAscertainer)
-        assertThat(shortestPathFinder.findShortestPath("1234"), equalTo("DR"))
+        assertThat(shortestPathFinder.find("1234"), equalTo("DR"))
     }
 
     @Test
@@ -20,7 +20,7 @@ class ShortestPathToVaultFinderTest {
         val roomMap = buildStandardRoomMap()
         val doorLockStateAscertainer = DoorLockStateDecoderMd5Impl()
         val shortestPathFinder = ShortestPathToVaultFinder(roomMap, doorLockStateAscertainer)
-        assertThat(shortestPathFinder.findShortestPath("ihgpwlah"), equalTo("DDRRRD"))
+        assertThat(shortestPathFinder.find("ihgpwlah"), equalTo("DDRRRD"))
     }
 
     @Test
@@ -28,7 +28,7 @@ class ShortestPathToVaultFinderTest {
         val roomMap = buildStandardRoomMap()
         val doorLockStateAscertainer = DoorLockStateDecoderMd5Impl()
         val shortestPathFinder = ShortestPathToVaultFinder(roomMap, doorLockStateAscertainer)
-        assertThat(shortestPathFinder.findShortestPath("kglvqrro"), equalTo("DDUDRLRRUDRD"))
+        assertThat(shortestPathFinder.find("kglvqrro"), equalTo("DDUDRLRRUDRD"))
     }
 
     @Test
@@ -36,7 +36,7 @@ class ShortestPathToVaultFinderTest {
         val roomMap = buildStandardRoomMap()
         val doorLockStateAscertainer = DoorLockStateDecoderMd5Impl()
         val shortestPathFinder = ShortestPathToVaultFinder(roomMap, doorLockStateAscertainer)
-        assertThat(shortestPathFinder.findShortestPath("ulqzkmiv"), equalTo("DRURDRUDDLLDLUURRDULRLDUUDDDRR"))
+        assertThat(shortestPathFinder.find("ulqzkmiv"), equalTo("DRURDRUDDLLDLUURRDULRLDUUDDDRR"))
     }
 
     @Test
@@ -44,7 +44,7 @@ class ShortestPathToVaultFinderTest {
         val roomMap = buildStandardRoomMap()
         val doorLockStateAscertainer = DoorLockStateDecoderMd5Impl()
         val shortestPathFinder = ShortestPathToVaultFinder(roomMap, doorLockStateAscertainer)
-        assertThat(shortestPathFinder.findShortestPath("bwnlcvfs"), equalTo("DDURRLRRDD"))
+        assertThat(shortestPathFinder.find("bwnlcvfs"), equalTo("DDURRLRRDD"))
     }
 
 

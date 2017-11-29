@@ -11,7 +11,7 @@ class LongestPathToVaultFinderTest {
         val roomMap = buildStandardRoomMap()
         val doorLockStateAscertainer = DoorLockStateDecoderMd5Impl()
         val shortestPathFinder = LongestPathToVaultFinder(roomMap, doorLockStateAscertainer)
-        assertThat(shortestPathFinder.findLongestPath("ihgpwlah"), equalTo(370))
+        assertThat(shortestPathFinder.find("ihgpwlah").length, equalTo(370))
     }
 
     @Test
@@ -19,7 +19,7 @@ class LongestPathToVaultFinderTest {
         val roomMap = buildStandardRoomMap()
         val doorLockStateAscertainer = DoorLockStateDecoderMd5Impl()
         val shortestPathFinder = LongestPathToVaultFinder(roomMap, doorLockStateAscertainer)
-        assertThat(shortestPathFinder.findLongestPath("kglvqrro"), equalTo(492))
+        assertThat(shortestPathFinder.find("kglvqrro").length, equalTo(492))
     }
 
     @Test
@@ -27,7 +27,7 @@ class LongestPathToVaultFinderTest {
         val roomMap = buildStandardRoomMap()
         val doorLockStateAscertainer = DoorLockStateDecoderMd5Impl()
         val shortestPathFinder = LongestPathToVaultFinder(roomMap, doorLockStateAscertainer)
-        assertThat(shortestPathFinder.findLongestPath("ulqzkmiv"), equalTo(830))
+        assertThat(shortestPathFinder.find("ulqzkmiv").length, equalTo(830))
     }
 
     @Test
@@ -35,7 +35,7 @@ class LongestPathToVaultFinderTest {
         val roomMap = buildStandardRoomMap()
         val doorLockStateAscertainer = DoorLockStateDecoderMd5Impl()
         val shortestPathFinder = LongestPathToVaultFinder(roomMap, doorLockStateAscertainer)
-        assertThat(shortestPathFinder.findLongestPath("bwnlcvfs"), equalTo(436))
+        assertThat(shortestPathFinder.find("bwnlcvfs").length, equalTo(436))
     }
 
 }

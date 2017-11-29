@@ -35,6 +35,10 @@ class RoomMapBuilder {
         if(y < height - 1){
             adjacentRooms.put(DOWN, Coordinate(x, y + 1))
         }
+        if(x == height - 1 && y == width - 1){
+            // vault room is always end of the line, so it doesn't need its adjoining rooms
+            return emptyMap()
+        }
         return adjacentRooms
     }
 }
