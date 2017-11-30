@@ -20,7 +20,7 @@ class ElfPartySimulatorAcrossEdition {
         val sizeAfterRemoval = elfCircle.size
         return when (currentElfIndex) {
             sizeAfterRemoval -> 0
-            sizeAfterRemoval - 1 -> currentElfIndex
+            sizeAfterRemoval - 1 -> if(indexOFElfToRemove == currentElfIndex + 1) 0 else currentElfIndex
             else -> if(currentElfIndex > indexOFElfToRemove) currentElfIndex else currentElfIndex + 1
         }
     }
