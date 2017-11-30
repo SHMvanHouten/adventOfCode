@@ -22,7 +22,13 @@ class ElfPartySimulatorAcrossEditionTest {
     @Test
     fun `it should find that elf number 6 will get all the presents of the 12`() {
         val elfPartySimulator = ElfPartySimulatorAcrossEdition()
-        assertThat(elfPartySimulator.getLuckyElf(12), equalTo(6))
+        assertThat(elfPartySimulator.getLuckyElf(12), equalTo(3))
+    }
+
+    @Test
+    fun `it should find that elf number 1 will get all the presents of the 4`() {
+        val elfPartySimulator = ElfPartySimulatorAcrossEdition()
+        assertThat(elfPartySimulator.getLuckyElf(4), equalTo(1))
     }
 
 
