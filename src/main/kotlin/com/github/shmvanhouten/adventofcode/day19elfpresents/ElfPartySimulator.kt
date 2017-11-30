@@ -1,8 +1,9 @@
 package com.github.shmvanhouten.adventofcode.day19elfpresents
 
 class ElfPartySimulator {
+
     fun getLuckyElf(amountOfElves: Int): Int {
-        val elfCircle = buildElfCircleAndGetFirstElf(amountOfElves)
+        val elfCircle = buildElfCircle(amountOfElves)
         var currentElfNumber = 1
         while (elfCircle.size != 1) {
             val elfToTakeFrom = elfCircle.getValue(currentElfNumber)
@@ -14,7 +15,7 @@ class ElfPartySimulator {
         return currentElfNumber
     }
 
-    private fun buildElfCircleAndGetFirstElf(amountOfElves: Int): MutableMap<Int, Int> {
+    private fun buildElfCircle(amountOfElves: Int): MutableMap<Int, Int> {
         val elves = 1.until(amountOfElves).associateBy({ it }, { it + 1 })
         return elves.plus(amountOfElves to 1).toMutableMap()
     }

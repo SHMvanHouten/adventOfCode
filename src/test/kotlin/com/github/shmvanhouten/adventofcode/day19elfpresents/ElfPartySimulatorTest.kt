@@ -2,7 +2,6 @@ package com.github.shmvanhouten.adventofcode.day19elfpresents
 
 import com.natpryce.hamkrest.assertion.assertThat
 import com.natpryce.hamkrest.equalTo
-import org.junit.Ignore
 import org.junit.Test
 
 class ElfPartySimulatorTest {
@@ -35,7 +34,7 @@ class ElfPartySimulatorTest {
     @Test
     fun `it should find which elf gets all the presents for the challenge input number of elves, 3018458`() {
         val elfPartySimulator = ElfPartySimulator()
-        assertThat(elfPartySimulator.getLuckyElf(3018458), equalTo(3))
+        assertThat(elfPartySimulator.getLuckyElf(3018458), equalTo(1842613))
     }
 
 
