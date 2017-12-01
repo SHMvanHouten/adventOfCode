@@ -14,6 +14,7 @@ class LinkedElfPartySimulatorTest {
 
     @Test
     fun `it should find that elf number 5 will get all the presents of the 10`() {
+        println((2+3)/2 %3)
         val elfCircleBuilder = ElfCircleBuilder()
         val elfPartySimulator = LinkedElfPartySimulator(elfCircleBuilder)
         assertThat(elfPartySimulator.getLuckyElf(10).number, equalTo(5))

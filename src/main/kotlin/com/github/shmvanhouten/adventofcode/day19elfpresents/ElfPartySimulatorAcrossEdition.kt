@@ -31,3 +31,9 @@ class ElfPartySimulatorAcrossEdition {
 
 
 }
+
+fun main(args: Array<String>) {
+    val elfPartySimulatorAcrossEdition = ElfPartySimulatorAcrossEdition()
+    val luckyElf = elfPartySimulatorAcrossEdition.getLuckyElf(3018458)
+    println(luckyElf)
+}
