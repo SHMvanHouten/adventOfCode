@@ -1,7 +1,8 @@
-package com.github.shmvanhouten.adventofcode.day19elfpresents
+package com.github.shmvanhouten.adventofcode.day19elfpresents.slowsolution
 
 import com.natpryce.hamkrest.assertion.assertThat
 import com.natpryce.hamkrest.equalTo
+import org.junit.Ignore
 import org.junit.Test
 
 class ElfPartySimulatorTest {
@@ -31,7 +32,7 @@ class ElfPartySimulatorTest {
     }
 
 
-    @Test
+    @Test@Ignore("takes about 12 seconds")
     fun `it should find which elf gets all the presents for the challenge input number of elves, 3018458`() {
         val elfPartySimulator = ElfPartySimulator()
         assertThat(elfPartySimulator.getLuckyElf(3018458), equalTo(1842613))

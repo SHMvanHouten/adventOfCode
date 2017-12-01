@@ -1,4 +1,4 @@
-package com.github.shmvanhouten.adventofcode.day19elfpresents
+package com.github.shmvanhouten.adventofcode.day19elfpresents.slowsolution
 
 class ElfPartySimulatorAcrossEdition {
     fun getLuckyElf(amountOfElves: Int): Int {
