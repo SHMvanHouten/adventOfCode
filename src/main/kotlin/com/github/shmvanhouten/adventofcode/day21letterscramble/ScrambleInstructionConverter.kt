@@ -16,8 +16,33 @@ class ScrambleInstructionConverter {
             SWAP_POSITION -> buildSwapPositionInstruction(splitInstruction)
             SWAP_LETTER -> buildSwapLetter(splitInstruction)
             REVERSE_POSITIONS -> buildReversePositions(splitInstruction)
-            else -> SwapPositionInstruction(0, 0)
+            ROTATE_LEFT -> buildRotateLeft(splitInstruction)
+            ROTATE_RIGHT -> buildRotateRight(splitInstruction)
+            ROTATE_BASED_ON_POSITION -> buildRotateBasedOnPosition(splitInstruction)
+            MOVE_POSITION -> buildMovePosition(splitInstruction)
         }
+    }
+
+    private fun buildRotateBasedOnPosition(splitInstruction: List<String>): Instruction {
+        val charToBaseAmountToMoveOn = splitInstruction[6].toChar()
+        return RotateRightBasedOnPositionInstruction(charToBaseAmountToMoveOn)
+
+    }
+
+    private fun buildMovePosition(splitInstruction: List<String>): Instruction {
+        val indexOfCharToRemove = splitInstruction[2].toInt()
+        val positionToMoveTo = splitInstruction[5].toInt()
+        return MovePositionInstruction(indexOfCharToRemove, positionToMoveTo)
+    }
+
+    private fun buildRotateRight(splitInstruction: List<String>): Instruction {
+        val amountToRotate = splitInstruction[2].toInt()
+        return RotateRightBasedOnAmountToRotateInstruction(amountToRotate)
+    }
+
+    private fun buildRotateLeft(splitInstruction: List<String>): Instruction {
+        val amountToRotate = splitInstruction[2].toInt()
+        return RotateLeftInstruction(amountToRotate)
     }
 
     private fun buildReversePositions(splitInstruction: List<String>): Instruction {
