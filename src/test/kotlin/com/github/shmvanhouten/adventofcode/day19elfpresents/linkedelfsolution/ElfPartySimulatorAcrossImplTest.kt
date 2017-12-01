@@ -38,7 +38,7 @@ class ElfPartySimulatorAcrossImplTest {
 
 
 
-    @Test @Ignore
+    @Test
     fun `it should find that elf number 3 will get all the presents of the 3018458`() {
         val elfCircleBuilder = DoubleLinkedElfCircleBuilder()
         val elfPartySimulator = ElfPartySimulatorAcrossImpl(elfCircleBuilder)
