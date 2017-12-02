@@ -103,23 +103,23 @@ class LetterScramblerTest {
     }
 
     @Test
-    fun `it should shift the whole string to the right 3 times because b is in position 2`() {
+    fun `it should shift the whole string to the right 3 times because c is in position 2`() {
         val scrambler = LetterScrambler()
-        val rawInstructions = "rotate based on position of letter b"
-        val password = "abdec"
-        assertThat(scrambler.scramblePassword(rawInstructions, password), equalTo("ecabd"))
+        val rawInstructions = "rotate based on position of letter c"
+        val password = "abcde"
+        assertThat(scrambler.scramblePassword(rawInstructions, password), equalTo("cdeab"))
     }
+
 
     @Test
     fun `it should solve the challenge input`() {
         val scrambler = LetterScrambler()
         val password = "abcdefgh"
-        assertThat(scrambler.scramblePassword(day21ChallengeInput, password), equalTo("abcdefgh"))
+        assertThat(scrambler.scramblePassword(day21ChallengeInput, password), equalTo("fdhbcgea"))
     }
-
-
 }
-val day21ChallengeInput = """swap position 7 with position 1
+
+internal val day21ChallengeInput = """swap position 7 with position 1
 swap letter e with letter d
 swap position 7 with position 6
 move position 4 to position 0
