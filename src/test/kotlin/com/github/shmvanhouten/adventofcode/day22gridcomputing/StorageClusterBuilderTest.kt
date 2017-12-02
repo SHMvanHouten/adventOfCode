@@ -23,4 +23,54 @@ Filesystem              Size  Used  Avail  Use%
         val cluster: StorageCluster = clusterBuilder.buildStorageClusterFromRawInput(rawInput)
         assertThat(cluster.grid.getValue(Coordinate(2,1)).size, equalTo(85))
     }
+
+    @Test
+    fun `it should build the challenge cluster`() {
+        val clusterBuilder = StorageClusterBuilder()
+
+        val cluster: StorageCluster = clusterBuilder.buildStorageClusterFromRawInput(day22ChallengeInput)
+        cluster.grid.values.forEach { if (it.available > 40) println(it) }
+//        println(cluster.grid.getValue(Coordinate(4, 25)))
+//        ClusterDrawer.drawCluster(cluster)
+    }
+}
+
+object ClusterDrawer {
+    fun drawCluster(cluster: StorageCluster) {
+        val width = cluster.getWidth()
+        val height = cluster.getHeight()
+        for(y in 0.until(height)){
+            val row = StringBuilder()
+            for (x in 0.until(width)){
+                val node = cluster.grid.getValue(Coordinate(x, y))
+                val available = node.available.toString()
+                row.append('.')
+                if(available.length < 3) row.append('.')
+                row.append(available)
+                row.append('/')
+                val used = node.used.toString()
+                row.append(used)
+                if(used.length < 3) row.append('.')
+                row.append(".  --  ")
+            }
+            println(row.toString())
+            println(" ")
+        }
+    }
+}
+
+private fun StorageCluster.getHeight(): Int {
+    var y = 0
+    while(this.grid.containsKey(Coordinate(0, y))){
+        y++
+    }
+    return y
+}
+
+private fun StorageCluster.getWidth(): Int {
+    var x = 0
+    while(this.grid.containsKey(Coordinate(x, 0))){
+        x++
+    }
+    return x
 }
