@@ -21,6 +21,6 @@ Filesystem              Size  Used  Avail  Use%
 /dev/grid/node-x2-y1     85T   68T    17T   80%
 /dev/grid/node-x2-y2     94T   66T    28T   70%"""
         val cluster: StorageCluster = clusterBuilder.buildStorageClusterFromRawInput(rawInput)
-        assertThat(cluster.getNode(Coordinate(2,1)).size, equalTo(85))
+        assertThat(cluster.grid.getValue(Coordinate(2,1)).size, equalTo(85))
     }
 }
