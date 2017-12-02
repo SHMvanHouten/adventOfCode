@@ -4,6 +4,7 @@ class ViablePairFinder(val storageClusterBuilder: StorageClusterBuilder = Storag
 
     fun countViablePairsFromRawInput(rawInput: String): Int {
         val storageCluster = storageClusterBuilder.buildStorageClusterFromRawInput(rawInput)
+        println(storageCluster.grid[Coordinate(29, 0)])
         return storageCluster.grid.values
                 .sumBy { node -> storageCluster.grid.values.count { otherNode ->  areNodesValidPairs(node, otherNode)} }
     }

@@ -2,13 +2,6 @@ package com.github.shmvanhouten.adventofcode.day22gridcomputing
 
 class StorageCluster(val grid: Map<Coordinate, StorageNode>) {
 
-//    fun getNode(coordinate: Coordinate): StorageNode {
-//        return grid.getValue(coordinate)
-//    }
-//
-//    private fun containsNode(coordinate: Coordinate): Boolean {
-//        return grid.containsKey(coordinate)
-//    }
 
 //    fun getAdjacentNodes(coordinate: Coordinate): List<StorageNode> {
 //        val x = coordinate.x
