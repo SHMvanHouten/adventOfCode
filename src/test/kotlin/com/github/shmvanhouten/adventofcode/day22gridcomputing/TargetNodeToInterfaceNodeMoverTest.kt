@@ -33,11 +33,11 @@ Filesystem              Size  Used  Avail  Use%
     }
 
     @Test
-    fun `it should move the target node to the interface node in 141 steps`() {
+    fun `it should move the target node to the interface node in 198 steps`() {
         val clusterBuilder = StorageClusterBuilder()
         val cluster: StorageCluster = clusterBuilder.buildStorageClusterFromRawInput(day22ChallengeInput)
 
         val mover = TargetNodeToInterfaceNodeMover(cluster)
-        assertThat(mover.moveTargetNodeDataToInterfaceNode(Coordinate(29,0)), equalTo(141))
+        assertThat(mover.moveTargetNodeDataToInterfaceNode(Coordinate(29,0)), equalTo(198))
     }
 }
