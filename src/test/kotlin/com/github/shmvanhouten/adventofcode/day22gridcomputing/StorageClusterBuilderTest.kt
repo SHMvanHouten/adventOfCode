@@ -13,7 +13,7 @@ class StorageClusterBuilderTest {
 Filesystem              Size  Used  Avail  Use%
 /dev/grid/node-x0-y0     92T   73T    19T   79%
 /dev/grid/node-x0-y1     91T   66T    25T   72%
-/dev/grid/node-x0-y2     85T   73T    12T   85%
+/dev/grid/node-x0-y2     85T   0T     85T    0%
 /dev/grid/node-x1-y0     91T   73T    18T   80%
 /dev/grid/node-x1-y1     94T   69T    25T   73%
 /dev/grid/node-x1-y2     89T   66T    23T   74%
@@ -22,6 +22,7 @@ Filesystem              Size  Used  Avail  Use%
 /dev/grid/node-x2-y2     94T   66T    28T   70%"""
         val cluster: StorageCluster = clusterBuilder.buildStorageClusterFromRawInput(rawInput)
         assertThat(cluster.grid.getValue(Coordinate(2,1)).size, equalTo(85))
+        ClusterDrawer.drawCluster(cluster)
     }
 
     @Test
@@ -30,8 +31,7 @@ Filesystem              Size  Used  Avail  Use%
 
         val cluster: StorageCluster = clusterBuilder.buildStorageClusterFromRawInput(day22ChallengeInput)
         cluster.grid.values.forEach { if (it.available > 40) println(it) }
-//        println(cluster.grid.getValue(Coordinate(4, 25)))
-//        ClusterDrawer.drawCluster(cluster)
+        ClusterDrawer.drawCluster(cluster)
     }
 }
 
@@ -44,14 +44,15 @@ object ClusterDrawer {
             for (x in 0.until(width)){
                 val node = cluster.grid.getValue(Coordinate(x, y))
                 val available = node.available.toString()
-                row.append('.')
-                if(available.length < 3) row.append('.')
+                val amountOfDotsToPrepend = (available.length - 3)
+                (amountOfDotsToPrepend..0).forEach { row.append('.') }
                 row.append(available)
                 row.append('/')
                 val used = node.used.toString()
                 row.append(used)
-                if(used.length < 3) row.append('.')
-                row.append(".  --  ")
+                val amountOfDotsToAppend = (used.length - 3)
+                (amountOfDotsToAppend..0).forEach { row.append('.') }
+                row.append("  --  ")
             }
             println(row.toString())
             println(" ")
