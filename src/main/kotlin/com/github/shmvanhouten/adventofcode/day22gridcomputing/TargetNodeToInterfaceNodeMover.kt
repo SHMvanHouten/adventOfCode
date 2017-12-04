@@ -8,9 +8,10 @@ class TargetNodeToInterfaceNodeMover(private val cluster: StorageCluster, privat
 
     fun moveTargetNodeDataToInterfaceNode(targetNodeCoordinate: Coordinate): Pair<StorageCluster, Int> {
         val (storageCluster, stepsTakenToMoveEmptyCluster) = emptyNodeMover.moveEmptyClusterTo(targetNodeCoordinate + LEFT.coordinate)
+
         // assumptions: empty node is next to the target node, both top roads are 'clear' to move the target node data
-        val (storageClusterWithTargetNodeInposition, stepsTakenToMoveTargetNode) = useEmptyClusterToMoveTargetNodeToInterfaceNode(storageCluster, targetNodeCoordinate)
-        return Pair(storageClusterWithTargetNodeInposition, stepsTakenToMoveEmptyCluster + stepsTakenToMoveTargetNode)
+        val (storageClusterWithTargetNodeInPosition, stepsTakenToMoveTargetNode) = useEmptyClusterToMoveTargetNodeToInterfaceNode(storageCluster, targetNodeCoordinate)
+        return Pair(storageClusterWithTargetNodeInPosition, stepsTakenToMoveEmptyCluster + stepsTakenToMoveTargetNode)
     }
 
     private fun useEmptyClusterToMoveTargetNodeToInterfaceNode(storageCluster: StorageCluster, targetNodeCoordinate: Coordinate): Pair<StorageCluster, Int> {
@@ -56,12 +57,12 @@ class TargetNodeToInterfaceNodeMover(private val cluster: StorageCluster, privat
     }
 
     private fun moveDataToEmptyNode(storageGrid: Map<Coordinate, StorageNode>, coordinateDataIsAt: Coordinate, emptyNodeCoordinate: Coordinate): Map<Coordinate, StorageNode> {
-        val storageGridTemp = storageGrid.toMutableMap()
+        val originalStorageGrid = storageGrid.toMutableMap()
         val emptyNode = storageGrid.getValue(emptyNodeCoordinate)
         val nodeWithTargetData = storageGrid.getValue(coordinateDataIsAt)
-        storageGridTemp.put(emptyNodeCoordinate, buildStorageNode(emptyNodeCoordinate, emptyNode, nodeWithTargetData))
-        storageGridTemp.put(coordinateDataIsAt, buildStorageNode(coordinateDataIsAt, nodeWithTargetData, emptyNode))
-        return storageGridTemp
+        originalStorageGrid.put(emptyNodeCoordinate, buildStorageNode(emptyNodeCoordinate, emptyNode, nodeWithTargetData))
+        originalStorageGrid.put(coordinateDataIsAt, buildStorageNode(coordinateDataIsAt, nodeWithTargetData, emptyNode))
+        return originalStorageGrid
     }
 
     private fun buildStorageNode(coordinate: Coordinate, nodeToTransferTo: StorageNode, nodeToTransferFrom: StorageNode): StorageNode {
