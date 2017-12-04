@@ -33,7 +33,6 @@ Filesystem              Size  Used  Avail  Use%
         val targetCoordinate = Coordinate(2, 0)
         val (clusterAfterMove, amountOfMoves) = mover.moveEmptyClusterTo(targetCoordinate)
         ClusterDrawer.drawCluster(clusterAfterMove)
-        assertThat(clusterAfterMove.getEmptyCluster()?.coordinate, equalTo(targetCoordinate))
         assertThat(amountOfMoves, equalTo(5))
     }
 

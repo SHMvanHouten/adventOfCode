@@ -22,14 +22,19 @@ Filesystem              Size  Used  Avail  Use%
 /dev/grid/node-x2-y1     85T   68T    17T   80%
 /dev/grid/node-x2-y2     94T   66T    28T   70%
 /dev/grid/node-x2-y3     94T   66T    28T   70%
-/dev/grid/node-x3-y0     94T   65T    29T   69%
+/dev/grid/node-x3-y0     94T   59T    29T   69%
 /dev/grid/node-x3-y1     94T   69T    25T   73%
 /dev/grid/node-x3-y2     89T   66T    23T   74%
 /dev/grid/node-x3-y3     89T   66T    23T   74%"""
         val clusterBuilder = StorageClusterBuilder()
         val cluster: StorageCluster = clusterBuilder.buildStorageClusterFromRawInput(rawInput)
+        val targetNodeCoordinate = Coordinate(3, 0)
+        val targetDataSize = cluster.get(targetNodeCoordinate).used
+
         val mover = TargetNodeToInterfaceNodeMover(cluster)
-        assertThat(mover.moveTargetNodeDataToInterfaceNode(Coordinate(3,0)), equalTo(11))
+        val (storageCluster, amountOfSteps) = mover.moveTargetNodeDataToInterfaceNode(targetNodeCoordinate)
+        assertThat(amountOfSteps, equalTo(11))
+        assertThat(targetDataSize, equalTo(storageCluster.get(Coordinate(0,0)).used))
     }
 
     @Test
@@ -37,7 +42,13 @@ Filesystem              Size  Used  Avail  Use%
         val clusterBuilder = StorageClusterBuilder()
         val cluster: StorageCluster = clusterBuilder.buildStorageClusterFromRawInput(day22ChallengeInput)
 
+        val targetNodeCoordinate = Coordinate(29, 0)
+
+        val targetDataSize = cluster.get(targetNodeCoordinate).used
+
         val mover = TargetNodeToInterfaceNodeMover(cluster)
-        assertThat(mover.moveTargetNodeDataToInterfaceNode(Coordinate(29,0)), equalTo(198))
+        val (storageCluster, amountOfSteps) = mover.moveTargetNodeDataToInterfaceNode(targetNodeCoordinate)
+        assertThat(amountOfSteps, equalTo(198))
+        assertThat(targetDataSize, equalTo(storageCluster.get(Coordinate(0,0)).used))
     }
 }
