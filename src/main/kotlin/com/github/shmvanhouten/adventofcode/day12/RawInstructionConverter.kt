@@ -2,6 +2,7 @@ package com.github.shmvanhouten.adventofcode.day12
 
 import com.github.shmvanhouten.adventofcode.day12.instruction.*
 import com.github.shmvanhouten.adventofcode.day12.instruction.InstructionType.*
+import com.github.shmvanhouten.adventofcode.day23assembunny2point0.instruction.ToggleInstruction
 
 class RawInstructionConverter {
 
@@ -12,24 +13,39 @@ class RawInstructionConverter {
     }
 
     private fun convertToInstruction(rawInstruction: List<String>): Instruction {
-        return when (getInstructionTypeFromRawInstruction(rawInstruction[0])){
+        return when (getInstructionTypeFromRawInstruction(rawInstruction[0])) {
             CPY -> buildCopyInstruction(rawInstruction)
             INC -> buildIncInstruction(rawInstruction)
             DEC -> buildDecInstruction(rawInstruction)
             JUMP -> buildJumpInstruction(rawInstruction)
+            TOGGLE -> buildToggleInstruction(rawInstruction)
         }
 
     }
 
-    private fun buildJumpInstruction(rawInstruction: List<String>): Instruction {
-        val amountToJump = rawInstruction[2].toInt()
-        val valueToCheck = getRegisterFromRawInstruction(rawInstruction[1])
+    private fun buildToggleInstruction(rawInstruction: List<String>): Instruction {
+        val registerToGetValueFrom = getRegisterFromRawInstruction(rawInstruction[1])!!
 
-        return if(valueToCheck == null){
-            if(rawInstruction[1].toInt() == 0) JumpInstruction(1)
-            else JumpInstruction(amountToJump)
+        return ToggleInstruction(registerToGetValueFrom)
+    }
+
+    private fun buildJumpInstruction(rawInstruction: List<String>): Instruction {
+        val valueToCheck = getRegisterFromRawInstruction(rawInstruction[1])
+        val valueToJump = getRegisterFromRawInstruction(rawInstruction[2])
+
+        return if (valueToCheck == null) {
+            if (valueToJump == null) {
+                JumpAlwaysInstruction(rawInstruction[2].toInt())
+            } else {
+                JumpByRegisterAmountInstruction(rawInstruction[1].toInt(), valueToJump)
+            }
         } else {
-            JumpDependentOnRegisterInstruction(valueToCheck, amountToJump)
+            if (valueToJump == null) {
+                JumpDependentOnRegisterInstruction(valueToCheck, rawInstruction[2].toInt())
+            }else{
+                JumpDependentOnRegisterByRegisterAmountInstruction(valueToCheck, valueToJump)
+            }
+
         }
     }
 
@@ -48,10 +64,10 @@ class RawInstructionConverter {
     private fun buildCopyInstruction(rawInstruction: List<String>): Instruction {
         val registerToSet = getRegisterFromRawInstruction(rawInstruction[2])!!
         val valueToCopy = getRegisterFromRawInstruction(rawInstruction[1])
-        return if(valueToCopy == null){
-            CopyConstantInstruction(registerToSet, rawInstruction[1].toInt())
+        return if (valueToCopy == null) {
+            CopyConstantInstruction(rawInstruction[1].toInt(), registerToSet)
         } else {
-            CopyRegisterInstruction(registerToSet, valueToCopy)
+            CopyRegisterInstruction(valueToCopy, registerToSet)
         }
     }
 }

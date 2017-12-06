@@ -4,32 +4,32 @@ import com.natpryce.hamkrest.assertion.assertThat
 import com.natpryce.hamkrest.equalTo
 import org.junit.Test
 
-class AssemBunnyCodeRunnerTest {
+class BasicAssemBunnyCodeRunnerTest {
 
     @Test
     fun `it should store a value of 3 to the register a`() {
-        val runner = AssemBunnyCodeRunner()
+        val runner = BasicAssemBunnyCodeRunner()
         val state = runner.runInput("cpy 3 a")
         assertThat(state.a, equalTo(3))
     }
 
 @Test
     fun `it should store a value of 5 to the register a`() {
-        val runner = AssemBunnyCodeRunner()
+        val runner = BasicAssemBunnyCodeRunner()
         val state = runner.runInput("cpy 5 a")
         assertThat(state.a, equalTo(5))
     }
 
 @Test
     fun `it should store a value of 3 to the register b`() {
-        val runner = AssemBunnyCodeRunner()
+        val runner = BasicAssemBunnyCodeRunner()
         val state = runner.runInput("cpy 3 b")
         assertThat(state.b, equalTo(3))
     }
 
 @Test
     fun `it should store a value of 3 to the register c`() {
-        val runner = AssemBunnyCodeRunner()
+        val runner = BasicAssemBunnyCodeRunner()
         val state = runner.runInput("cpy 3 c")
         assertThat(state.c, equalTo(3))
     }
@@ -37,7 +37,7 @@ class AssemBunnyCodeRunnerTest {
 
 @Test
     fun `it should store a value of 3 to register a and 5 to the register c`() {
-        val runner = AssemBunnyCodeRunner()
+        val runner = BasicAssemBunnyCodeRunner()
         val state = runner.runInput("""cpy 5 c
 cpy 3 a""")
         assertThat(state, equalTo(BunnyState(a = 3, c = 5)))
@@ -45,7 +45,7 @@ cpy 3 a""")
 
     @Test
     fun `it should increase the value of a by 1 to 42`() {
-        val runner = AssemBunnyCodeRunner()
+        val runner = BasicAssemBunnyCodeRunner()
         val state = runner.runInput("""cpy 41 a
 inc a""")
         assertThat(state, equalTo(BunnyState(a = 42)))
@@ -53,7 +53,7 @@ inc a""")
 
     @Test
     fun `it should decrease the value of a by 1 to 40`() {
-        val runner = AssemBunnyCodeRunner()
+        val runner = BasicAssemBunnyCodeRunner()
         val state = runner.runInput("""cpy 41 a
 dec a""")
         assertThat(state, equalTo(BunnyState(a = 40)))
@@ -61,7 +61,7 @@ dec a""")
 
     @Test
     fun `it should jump forwards to skip the last instruction`() {
-        val runner = AssemBunnyCodeRunner()
+        val runner = BasicAssemBunnyCodeRunner()
         val state = runner.runInput("""cpy 41 a
 inc a
 inc a
@@ -72,7 +72,7 @@ dec a""")
     }
     @Test
     fun `it should jump backwards to dec a and finally add 1`() {
-        val runner = AssemBunnyCodeRunner()
+        val runner = BasicAssemBunnyCodeRunner()
         val state = runner.runInput("""cpy 41 a
 inc a
 inc a
@@ -84,13 +84,13 @@ inc a""")
 
     @Test
     fun `it should run the challenge input`() {
-        val runner = AssemBunnyCodeRunner()
+        val runner = BasicAssemBunnyCodeRunner()
         assertThat(runner.runInput(challengeInput), equalTo(BunnyState(a = 318083, b = 196418)))
     }
 
     @Test
     fun `it should run the challenge input with a different initial state c = 1`() {
-        val runner = AssemBunnyCodeRunner()
+        val runner = BasicAssemBunnyCodeRunner()
         assertThat(runner.runInput(challengeInput, BunnyState(c = 1)), equalTo(BunnyState(a = 9227737, b = 5702887)))
     }
 }

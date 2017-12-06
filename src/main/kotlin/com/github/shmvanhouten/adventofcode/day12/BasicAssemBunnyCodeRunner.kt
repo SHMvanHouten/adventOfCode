@@ -1,7 +1,8 @@
 package com.github.shmvanhouten.adventofcode.day12
 
-class AssemBunnyCodeRunner(private val rawInstructionConverter: RawInstructionConverter = RawInstructionConverter()) {
-    fun runInput(input: String, initialState: BunnyState = BunnyState()): BunnyState {
+class BasicAssemBunnyCodeRunner(private val rawInstructionConverter: RawInstructionConverter = RawInstructionConverter()): AssembunnyCodeRunner {
+
+    override fun runInput(input: String, initialState: BunnyState): BunnyState {
 
         val instructionList = rawInstructionConverter.convertRawInstructionToInstructionList(input)
 
