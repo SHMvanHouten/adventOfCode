@@ -29,7 +29,7 @@ dec a"""
     @Test
     fun `it should solve the challenge input part 2`() {
         val codeRunner = AdvancedAssembunnyCodeRunner()
-        assertThat(codeRunner.runInput(day23ChallengeInput, BunnyState(a = 12)).a, equalTo(11200))
+        assertThat(codeRunner.runInput(day23ChallengeInput, BunnyState(a = 12)).a, equalTo(479007760))
     }
 
 }

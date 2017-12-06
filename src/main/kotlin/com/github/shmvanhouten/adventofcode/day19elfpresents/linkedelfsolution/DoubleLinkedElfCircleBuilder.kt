@@ -10,7 +10,8 @@ class DoubleLinkedElfCircleBuilder : LinkedElfCircleBuilder {
 
         for(index in 2..amountOfElves){
             val currentElf = LinkedElf(index)
-            previousAddedElf = currentElf
+
+            previousAddedElf.nextElf = currentElf
             currentElf.previousElf = previousAddedElf
 
             previousAddedElf = currentElf
