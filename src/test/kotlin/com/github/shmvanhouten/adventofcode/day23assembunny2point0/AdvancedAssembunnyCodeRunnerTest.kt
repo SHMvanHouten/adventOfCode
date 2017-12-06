@@ -25,6 +25,13 @@ dec a"""
         val codeRunner = AdvancedAssembunnyCodeRunner()
         assertThat(codeRunner.runInput(day23ChallengeInput, BunnyState(a = 7)).a, equalTo(11200))
     }
+
+    @Test
+    fun `it should solve the challenge input part 2`() {
+        val codeRunner = AdvancedAssembunnyCodeRunner()
+        assertThat(codeRunner.runInput(day23ChallengeInput, BunnyState(a = 12)).a, equalTo(11200))
+    }
+
 }
 
 val day23ChallengeInput = """cpy a b
