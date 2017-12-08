@@ -1,6 +1,7 @@
 package com.github.shmvanhouten.adventofcode.day22gridcomputing
 
 data class Coordinate(val x: Int, val y: Int) {
+
     override fun equals(other: Any?): Boolean {
         return if(other is Coordinate){
             this.x == other.x && this.y == other.y
