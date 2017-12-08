@@ -2,6 +2,7 @@ package com.github.shmvanhouten.adventofcode.day13
 
 import com.github.shmvanhouten.adventofcode.day13.MazeComponent.WALL
 import org.junit.Test
+import com.github.shmvanhouten.adventofcode.day22gridcomputing.Coordinate
 
 
 class MazeBuilderTest {

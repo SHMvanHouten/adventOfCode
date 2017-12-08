@@ -4,6 +4,8 @@ import com.github.shmvanhouten.adventofcode.day13.MazeComponent
 import com.github.shmvanhouten.adventofcode.day22gridcomputing.Coordinate
 
 class MazeBuilder {
+    private val coordinatesOfRelevantLocations = mutableMapOf<Int, Coordinate>()
+
     fun buildMazeFromRawInput(rawInput: String): AirDuctMaze {
 
         val grid = rawInput
@@ -12,21 +14,22 @@ class MazeBuilder {
                 .flatMap { it.entries }
                 .associateBy ({ it.key }, { it.value } )
 
-        return AirDuctMaze(grid)
+        return AirDuctMaze(grid, coordinatesOfRelevantLocations)
     }
 
-    private fun convertLineToRowOfMazeComponents(line: String, yCoordinate: Int): Map<Coordinate, MazePart> {
+    private fun convertLineToRowOfMazeComponents(line: String, yCoordinate: Int): Map<Coordinate, MazeComponent> {
         return line.mapIndexed { index, char ->
             var numberedCorridor: Int? = null
+            val currentCoordinate = Coordinate(index, yCoordinate)
             val mazeComponent = when(char){
                 '#' -> MazeComponent.WALL
                 '.' -> MazeComponent.CORRIDOR
                 else -> {
-                    numberedCorridor = char.intValue()
+                    coordinatesOfRelevantLocations.put(char.intValue(), currentCoordinate)
                     MazeComponent.CORRIDOR
                 }
             }
-            Coordinate(index, yCoordinate) to MazePart(mazeComponent, numberedCorridor)
+            currentCoordinate to mazeComponent
         }.toMap()
     }
 }

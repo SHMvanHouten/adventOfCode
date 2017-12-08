@@ -1,5 +1,7 @@
 package com.github.shmvanhouten.adventofcode.day13
 
+import com.github.shmvanhouten.adventofcode.day22gridcomputing.Coordinate
+
 class PathsForFavoriteNumberFinder(private val mazeBuilder: MazeBuilder = MazeBuilder(), private val pathFinder: PathFinder = PathFinder()) {
 
     fun findQuickestPathForCoordinate(numberToDrawMaze: Int, targetCoordinate: Coordinate): Set<Coordinate>? {

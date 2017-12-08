@@ -1,5 +1,6 @@
 package com.github.shmvanhouten.adventofcode.day24airductmaze
 
+import com.github.shmvanhouten.adventofcode.day13.MazeComponent.CORRIDOR
 import com.github.shmvanhouten.adventofcode.day13.MazeComponent.WALL
 import com.github.shmvanhouten.adventofcode.day22gridcomputing.Coordinate
 import com.natpryce.hamkrest.assertion.assertThat
@@ -18,10 +19,11 @@ class MazeBuilderTest {
 ###########"""
         val maze: AirDuctMaze = mazeBuilder.buildMazeFromRawInput(rawInput)
 
-        assertThat(maze.grid.getValue(Coordinate(1,1)).number, equalTo(0))
-        assertThat(maze.grid.getValue(Coordinate(0,0)).mazeComponent, equalTo(WALL))
+        assertThat(maze.grid.getValue(Coordinate(1,1)), equalTo(CORRIDOR))
+        assertThat(maze.grid.getValue(Coordinate(0,0)), equalTo(WALL))
+        assertThat(maze.coordinatesOfRelevantLocations.getValue(4), equalTo(Coordinate(1, 3)))
         for (entry in maze.grid) {
-            println("${entry.key} is a ${entry.value.mazeComponent}")
+            println("${entry.key} is a ${entry.value}")
         }
     }
 }

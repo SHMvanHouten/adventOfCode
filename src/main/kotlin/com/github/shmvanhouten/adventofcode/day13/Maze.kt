@@ -1,6 +1,7 @@
 package com.github.shmvanhouten.adventofcode.day13
 
 import com.github.shmvanhouten.adventofcode.day13.MazeComponent.*
+import com.github.shmvanhouten.adventofcode.day22gridcomputing.Coordinate
 
 class Maze(val height: Int = 50, val width: Int = 50) {
 

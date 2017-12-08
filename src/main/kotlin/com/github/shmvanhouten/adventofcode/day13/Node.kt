@@ -1,5 +1,7 @@
 package com.github.shmvanhouten.adventofcode.day13
 
+import com.github.shmvanhouten.adventofcode.day22gridcomputing.Coordinate
+
 data class Node(val coordinate: Coordinate,
                 val shortestPath: Set<Coordinate> = emptySet()){
 

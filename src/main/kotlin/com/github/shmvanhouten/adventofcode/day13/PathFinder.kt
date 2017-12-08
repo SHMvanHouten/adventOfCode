@@ -1,5 +1,7 @@
 package com.github.shmvanhouten.adventofcode.day13
 
+import com.github.shmvanhouten.adventofcode.day22gridcomputing.Coordinate
+
 class PathFinder {
     private val SOURCE_COORDINATE = Coordinate(1, 1)
 
@@ -41,6 +43,7 @@ class PathFinder {
         if (possibleVisitedNode != null) {
 
             if (possibleVisitedNode.shortestPath.size > currentNode.shortestPath.size) {
+                //todo: this should not happen since shortest route nodes get evaluated first
                 newVisitedNodes -= possibleVisitedNode
                 newVisitedNodes += currentNode
             } // else keep the original visited node with the shorter path

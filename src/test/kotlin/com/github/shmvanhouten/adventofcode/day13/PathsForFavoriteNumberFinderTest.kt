@@ -3,6 +3,7 @@ package com.github.shmvanhouten.adventofcode.day13
 import com.natpryce.hamkrest.equalTo
 import com.natpryce.hamkrest.assertion.assertThat
 import org.junit.Test
+import com.github.shmvanhouten.adventofcode.day22gridcomputing.Coordinate
 
 class PathsForFavoriteNumberFinderTest {
 

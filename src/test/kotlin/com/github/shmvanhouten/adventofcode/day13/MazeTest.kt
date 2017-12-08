@@ -1,6 +1,8 @@
 package com.github.shmvanhouten.adventofcode.day13
 
-import com.github.shmvanhouten.adventofcode.day13.MazeComponent.*
+import com.github.shmvanhouten.adventofcode.day13.MazeComponent.CORRIDOR
+import com.github.shmvanhouten.adventofcode.day13.MazeComponent.WALL
+import com.github.shmvanhouten.adventofcode.day22gridcomputing.Coordinate
 import com.natpryce.hamkrest.assertion.assertThat
 import com.natpryce.hamkrest.equalTo
 import org.junit.Test
