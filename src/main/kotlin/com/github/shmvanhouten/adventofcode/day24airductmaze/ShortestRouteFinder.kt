@@ -1,59 +1,43 @@
 package com.github.shmvanhouten.adventofcode.day24airductmaze
 
-import com.github.shmvanhouten.adventofcode.day13.Node
 import com.github.shmvanhouten.adventofcode.day22gridcomputing.Coordinate
 
 
-class ShortestRouteFinder(private val mazeBuilder: MazeBuilder = MazeBuilder()) {
+class ShortestRouteFinder(private val mazeBuilder: MazeBuilder = MazeBuilder(),
+                          private val pathFinder: PathFinder = PathFinder(),
+                          private val routeFinder: RouteFinder = RouteFinder()) {
 
-    fun findShortestRoute(rawInput: String): Int {
+    fun findShortestRoute(rawInput: String): Int? {
 
         val airDuctMaze = mazeBuilder.buildMazeFromRawInput(rawInput)
 
-        val startingPoint = airDuctMaze.coordinatesOfRelevantLocations.getValue(0)
+        val possibleRoutesAndSizes = getPossibleRoutesAndSizes(airDuctMaze)
 
-        val endPoint = airDuctMaze.coordinatesOfRelevantLocations.getValue(1)
-
-        return getShortestRouteFromPointToPoint(startingPoint, endPoint, airDuctMaze)
+        return routeFinder.getFastestRoute(possibleRoutesAndSizes, airDuctMaze.coordinatesOfRelevantLocations.keys)
     }
 
-    private fun getShortestRouteFromPointToPoint(startingPoint: Coordinate, endPoint: Coordinate, airDuctMaze: AirDuctMaze): Int {
 
-        var unvisitedNodes = setOf(Node(startingPoint))
-        var visitedNodes = setOf<Node>()
+    private fun getPossibleRoutesAndSizes(airDuctMaze: AirDuctMaze): Map<Route, Int> {
+        var handledCoordinatesOfRelevantLocations = airDuctMaze.coordinatesOfRelevantLocations
 
-        while (unvisitedNodes.isNotEmpty()){
-            val currentNode = getLowestDistanceNode(unvisitedNodes)
-            unvisitedNodes -= currentNode
+        return airDuctMaze.coordinatesOfRelevantLocations
+                .flatMap { entry ->
+                    handledCoordinatesOfRelevantLocations -= entry.key
+                    handledCoordinatesOfRelevantLocations.map { buildRoute(entry, it) to pathFinder.getShortestRouteFromPointToPoint(entry.value, it.value, airDuctMaze) }
+                }
+                .toMap()
+    }
 
-            if(currentNode.coordinate == endPoint){
-                return currentNode.shortestPath.size
-            }
+    private fun buildRoute(startPoint: Map.Entry<Int, Coordinate>, endPoint: Map.Entry<Int, Coordinate>): Route {
 
-            val adjacentNodes = buildAdjacentNodes(currentNode, airDuctMaze)
-                    .filter { !visitedNodes.contains(it) }
-
-            unvisitedNodes += adjacentNodes
-
-            if (visitedNodes.contains(currentNode)){
-                println("this should not happen")
-                // do nothing, visitedNodes will have a shorter or equal path-size node
-            } else{
-                visitedNodes += currentNode
-            }
-
+        val startPointNumber = startPoint.key
+        val endpointNumber = endPoint.key
+        return if(endpointNumber > startPointNumber){
+            Route(startPointNumber, endpointNumber)
+        }else {
+            Route(endpointNumber, startPointNumber)
         }
-
-        return -1
     }
 
-    private fun buildAdjacentNodes(currentNode: Node, airDuctMaze: AirDuctMaze): Set<Node> {
-        return airDuctMaze.getAdjacentNodes(currentNode.coordinate)
-                .map { Node(it, currentNode.shortestPath.plus(it)) }
-                .toSet()
-    }
 
-    private fun getLowestDistanceNode(unvisitedNodes: Set<Node>): Node {
-        return unvisitedNodes.minBy { it.shortestPath.size } ?: unvisitedNodes.first()
-    }
 }
