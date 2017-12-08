@@ -1,5 +1,9 @@
 package com.github.shmvanhouten.adventofcode.day19elfpresents.linkedelfsolution
 
+/* Once the first elf to dismiss (unlucky elf) is found, the next elf to dismiss will be either one step or two
+  * steps away from the last unlucky elf, which means we only need to do the expensive search for an elf
+*/
+
 class ElfPartySimulatorAcrossImpl(private val elfCircleBuilder: DoubleLinkedElfCircleBuilder) : ElfPartySimulator {
     override fun getLuckyElf(amountOfElves: Int): LinkedElf {
 

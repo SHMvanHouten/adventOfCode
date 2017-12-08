@@ -8,18 +8,22 @@ class DoubleLinkedElfCircleBuilder : LinkedElfCircleBuilder {
 
         var previousAddedElf = firstElf
 
-        for(index in 2..amountOfElves){
-            val currentElf = LinkedElf(index)
 
-            previousAddedElf.nextElf = currentElf
-            currentElf.previousElf = previousAddedElf
+        (2..amountOfElves).forEach {
+            val currentElf = LinkedElf(it)
+
+            assignElfNeighbours(previousAddedElf, currentElf)
 
             previousAddedElf = currentElf
         }
 
-        previousAddedElf.nextElf = firstElf
-        firstElf.previousElf = previousAddedElf
+        assignElfNeighbours(previousAddedElf, firstElf)
 
         return firstElf
+    }
+
+    private fun assignElfNeighbours(previousAddedElf: LinkedElf, currentElf: LinkedElf) {
+        previousAddedElf.nextElf = currentElf
+        currentElf.previousElf = previousAddedElf
     }
 }

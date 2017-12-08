@@ -12,7 +12,7 @@ data class LinkedElf(val number: Int): Comparable<LinkedElf> {
         this.previousElf = previousElf
     }
 
-    override operator fun compareTo(nextElf: LinkedElf): Int {
-        return this.number.compareTo(nextElf.number)
+    override operator fun compareTo(other: LinkedElf): Int {
+        return this.number.compareTo(other.number)
     }
 }
