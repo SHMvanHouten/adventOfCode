@@ -13,7 +13,17 @@ class ShortestRouteFinder(private val mazeBuilder: MazeBuilder = MazeBuilder(),
 
         val possibleRoutesAndSizes = getPossibleRoutesAndSizes(airDuctMaze)
 
-        return routeFinder.getFastestRoute(possibleRoutesAndSizes, airDuctMaze.coordinatesOfRelevantLocations.keys)
+        return routeFinder.getPossibleRoutes(possibleRoutesAndSizes, airDuctMaze.coordinatesOfRelevantLocations.keys)
+                .minBy { it.weight }?.weight
+    }
+
+    fun findShortestRouteReturningToZeroAfter(rawInput: String): Int? {
+        val airDuctMaze = mazeBuilder.buildMazeFromRawInput(rawInput)
+
+        val possibleRoutesAndSizes = getPossibleRoutesAndSizes(airDuctMaze)
+
+        return routeFinder.getPossibleRoutesReturningToZero(possibleRoutesAndSizes, airDuctMaze.coordinatesOfRelevantLocations.keys)
+                .minBy { it.weight }?.weight
     }
 
 
