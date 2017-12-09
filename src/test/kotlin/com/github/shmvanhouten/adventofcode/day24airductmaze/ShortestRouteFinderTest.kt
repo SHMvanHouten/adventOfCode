@@ -76,7 +76,7 @@ class ShortestRouteFinderTest {
     fun `it should solve the challenge input for part 2`() {
         val routeFinder = ShortestRouteFinder()
 
-        assertThat(routeFinder.findShortestRouteReturningToZeroAfter(day24ChallengeInputMaze), equalTo(490))
+        assertThat(routeFinder.findShortestRouteReturningToZeroAfter(day24ChallengeInputMaze), equalTo(744))
     }
 
 }

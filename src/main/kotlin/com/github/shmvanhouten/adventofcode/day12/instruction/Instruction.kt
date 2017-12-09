@@ -22,7 +22,8 @@ enum class InstructionType(val rawInstructionPart: String){
     INC("inc"),
     DEC("dec"),
     JUMP("jnz"),
-    TOGGLE("tgl")
+    TOGGLE("tgl"),
+    OUT("out")
 }
 
 internal fun getInstructionTypeFromRawInstruction(rawInstruction: String): InstructionType {

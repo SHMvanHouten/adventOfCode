@@ -1,14 +1,14 @@
 package com.github.shmvanhouten.adventofcode.day19elfpresents.linkedelfsolution
 
-class ElfCircleBuilder: LinkedElfCircleBuilder {
+class ElfCircleBuilder : LinkedElfCircleBuilder {
 
     override fun buildAndReturnFirst(amountOfElves: Int): LinkedElf {
         val firstElf = LinkedElf(1)
 
         var previousAddedElf = firstElf
 
-        for(index in 2..amountOfElves){
-            val currentElf = LinkedElf(index)
+        (2..amountOfElves).forEach { elfNumber ->
+            val currentElf = LinkedElf(elfNumber)
             previousAddedElf.nextElf = currentElf
 
             previousAddedElf = currentElf

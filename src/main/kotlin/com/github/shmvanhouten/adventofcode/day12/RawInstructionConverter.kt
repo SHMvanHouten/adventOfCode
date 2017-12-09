@@ -19,8 +19,13 @@ class RawInstructionConverter {
             DEC -> buildDecInstruction(rawInstruction)
             JUMP -> buildJumpInstruction(rawInstruction)
             TOGGLE -> buildToggleInstruction(rawInstruction)
+            OUT -> buildOutInstruction(rawInstruction)
         }
 
+    }
+
+    private fun buildOutInstruction(rawInstruction: List<String>): Instruction {
+        return OutInstruction(getRegisterFromRawInstruction(rawInstruction[1])!!)
     }
 
     private fun buildToggleInstruction(rawInstruction: List<String>): Instruction {
@@ -71,3 +76,4 @@ class RawInstructionConverter {
         }
     }
 }
+
